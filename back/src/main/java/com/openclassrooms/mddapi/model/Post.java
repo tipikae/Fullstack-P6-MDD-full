@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "posts")
+@Table(name = "POSTS")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,7 +36,7 @@ public class Post {
 	@JoinColumn(name = "topic_id")
 	private Topic topic;
 
-	@OneToMany(mappedBy = "post_id")
+	@OneToMany(mappedBy = "post")
 	private List<Comment> comments;
 
 	@Column(name = "created_at", updatable = false)

@@ -1,8 +1,7 @@
 package com.openclassrooms.mddapi.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,16 +24,15 @@ public class User {
     private long id;
 
     @Size(max = 50)
-    @NotBlank
+    @NotNull
     private String username;
 
     @Size(max = 255)
-    @Email
-    @NotBlank
+    @NotNull
     private String email;
 
     @Size(max = 255)
-    @NotBlank
+    @NotNull
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)

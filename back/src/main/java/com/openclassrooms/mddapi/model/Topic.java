@@ -1,7 +1,7 @@
 package com.openclassrooms.mddapi.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +23,7 @@ public class Topic {
 	private Long id;
 
 	@Size(max = 100)
-	@NotBlank
+	@NotNull
 	private String name;
 
 	@Column(name = "created_at", updatable = false)

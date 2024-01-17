@@ -24,11 +24,12 @@ public class Comment {
 	private Long id;
 
 	@Size(max = 255)
-	@NotBlank
+	@NotNull
 	private String comment;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
+	@NotNull
 	private User author;
 
 	@ManyToOne

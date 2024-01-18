@@ -31,6 +31,11 @@ public class UserRepositoryITest {
         // get one by id
         assertTrue(userRepository.existsById(user.getId()));
 
+        // exists by email or username
+        assertTrue(userRepository.existsByEmailOrUsername(user.getEmail(), "unused_username"));
+        assertTrue(userRepository.existsByEmailOrUsername("unused@email.com", user.getUsername()));
+        assertFalse(userRepository.existsByEmailOrUsername("unused@email.com", "unused_username"));
+
         // delete
         userRepository.deleteById(user.getId());
         assertFalse(userRepository.existsById(user.getId()));

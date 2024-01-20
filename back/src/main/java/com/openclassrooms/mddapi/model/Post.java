@@ -41,9 +41,6 @@ public class Post {
 	@NotNull
 	private Topic topic;
 
-	@OneToMany(mappedBy = "post")
-	private List<Comment> comments;
-
 	@Column(name = "created_at", updatable = false)
 	private LocalDateTime createdAt;
 }

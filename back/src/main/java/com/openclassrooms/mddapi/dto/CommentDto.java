@@ -20,11 +20,7 @@ public class CommentDto {
     @NotBlank(message = "Comment must not be empty.")
     private String comment;
 
-    @NotNull(message = "Author id must not be null.")
-    private long authorId;
-
-    @NotNull(message = "Post id must not be null.")
-    private long postId;
+    private String author;
 
     private LocalDateTime createdAt;
 }

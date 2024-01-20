@@ -84,6 +84,9 @@ public class CommentRepositoryITest {
         // get one by id
         assertTrue(commentRepository.existsById(comment.getId()));
 
+        // find by post id
+        assertEquals(1, commentRepository.findByPostId(post.getId()).size());
+
         // delete
         commentRepository.deleteById(comment.getId());
         assertFalse(commentRepository.existsById(comment.getId()));

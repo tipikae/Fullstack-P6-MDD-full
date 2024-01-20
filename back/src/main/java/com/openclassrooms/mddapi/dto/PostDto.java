@@ -27,7 +27,7 @@ public class PostDto {
     @NotNull(message = "Author id must not be null.")
     private long authorId;
 
-    @NotNull(message = "Topic id must not be null.")
+    @NotNull(message = "Topic must not be null.")
     private long topicId;
 
     private LocalDateTime createdAt;

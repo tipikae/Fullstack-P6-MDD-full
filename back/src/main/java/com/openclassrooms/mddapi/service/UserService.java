@@ -31,6 +31,14 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public void update(long id, User user) throws NotFoundException {
+        if (!userRepository.existsById(id)) {
+            throw new NotFoundException(String.format("User with id = %d is not found.", id));
+        }
+        userRepository.save(user);
+    }
+
+    @Override
     public User getById(long id) throws NotFoundException {
         User user = userRepository.findById(id).orElse(null);
         if (user == null) {

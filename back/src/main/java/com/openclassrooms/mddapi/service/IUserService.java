@@ -9,6 +9,8 @@ public interface IUserService {
 
     User create(User user) throws AlreadyExistsException;
 
+    void update(long id, User user) throws NotFoundException;
+
     User getById(long id) throws NotFoundException;
 
     void subscribe(long userId, long topicId) throws NotFoundException, BadRequestException;

@@ -14,13 +14,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class CommentDto {
 
-    private long id;
+    private Long id;
 
     @Size(max = 255, message = "Comment length must be 255 max.")
     @NotBlank(message = "Comment must not be empty.")
     private String comment;
 
-    private String author;
+    private Long authorId;
+
+    private String authorUsername;
+
+    private Long postId;
 
     private LocalDateTime createdAt;
 }

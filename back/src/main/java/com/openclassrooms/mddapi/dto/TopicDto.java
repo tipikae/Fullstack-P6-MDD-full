@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class TopicDto {
 
-    private long id;
+    private Long id;
 
     @Size(max = 100, message = "Name length must be 100 max.")
     @NotBlank(message = "Name must not be empty.")

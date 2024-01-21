@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class UserDto {
 
-    private long id;
+    private Long id;
 
     @Size(max = 50, message = "Username length must be 50 max.")
     @NotBlank(message = "Username must not be empty.")

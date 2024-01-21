@@ -24,11 +24,14 @@ public class PostDto {
     @NotBlank(message = "Content must not be empty.")
     private String content;
 
-    @NotNull(message = "Author id must not be null.")
-    private long authorId;
+    private Long authorId;
 
-    @NotNull(message = "Topic must not be null.")
-    private long topicId;
+    private String authorUsername;
+
+    @NotNull(message = "Topic id must not be empty.")
+    private Long topicId;
+
+    private String topicName;
 
     private LocalDateTime createdAt;
 }

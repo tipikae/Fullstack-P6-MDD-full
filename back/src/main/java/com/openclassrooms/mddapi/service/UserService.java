@@ -8,6 +8,7 @@ import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.TopicRepository;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
@@ -21,12 +22,16 @@ public class UserService implements IUserService {
     @Autowired
     private TopicRepository topicRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public User create(User user) throws AlreadyExistsException {
         if (userRepository.existsByEmailOrUsername(user.getEmail(), user.getUsername())) {
             throw new AlreadyExistsException("Email or username is already taken.");
         }
 
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 

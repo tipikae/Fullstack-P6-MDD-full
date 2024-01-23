@@ -9,9 +9,11 @@ public interface IUserService {
 
     User create(User user) throws AlreadyExistsException;
 
-    void update(long id, User user) throws NotFoundException;
+    void update(long id, User user) throws NotFoundException, AlreadyExistsException;
 
     User getById(long id) throws NotFoundException;
+
+    User getByEmail(String email) throws NotFoundException;
 
     void subscribe(long userId, long topicId) throws NotFoundException, BadRequestException;
 

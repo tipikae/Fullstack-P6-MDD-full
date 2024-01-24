@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.mddapi.model.Topic;
-import com.openclassrooms.mddapi.repository.TopicRepository;
+import com.openclassrooms.mddapi.repository.ITopicRepository;
 
 @Service
 public class TopicService implements ITopicService {
 
 	@Autowired
-	private TopicRepository topicRepository;
+	private ITopicRepository topicRepository;
 
 	@Override
 	public Topic getById(long id) throws NotFoundException {

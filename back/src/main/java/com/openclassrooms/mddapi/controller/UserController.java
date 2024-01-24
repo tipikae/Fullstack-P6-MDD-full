@@ -8,6 +8,7 @@ import com.openclassrooms.mddapi.mapper.UserMapper;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.payload.request.RegisterRequest;
 import com.openclassrooms.mddapi.payload.response.MessageResponse;
+import com.openclassrooms.mddapi.service.IUserService;
 import com.openclassrooms.mddapi.service.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -26,7 +27,7 @@ import java.util.Objects;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     @Autowired
     private UserMapper userMapper;
@@ -45,8 +46,8 @@ public class UserController {
             throws NotFoundException, BadRequestException, AlreadyExistsException {
 
         User user = userService.getByEmail(principal.getName());
-        if (!Objects.equals(user.getId(), id)) {
-            throw new BadRequestException("Bad parameter.");
+        if (user == null || !Objects.equals(user.getId(), id)) {
+            throw new BadRequestException("Illegal operation.");
         }
 
         userService.update(id, User.builder()

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.openclassrooms.mddapi.model.Post;
 
 @Repository
-public interface PostRepository extends JpaRepository<Post, Long>{
+public interface IPostRepository extends JpaRepository<Post, Long>{
 
 }

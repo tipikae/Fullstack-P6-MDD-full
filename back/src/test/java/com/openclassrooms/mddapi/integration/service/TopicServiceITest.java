@@ -2,8 +2,8 @@ package com.openclassrooms.mddapi.integration.service;
 
 import com.openclassrooms.mddapi.exception.NotFoundException;
 import com.openclassrooms.mddapi.model.Topic;
-import com.openclassrooms.mddapi.repository.TopicRepository;
-import com.openclassrooms.mddapi.service.TopicService;
+import com.openclassrooms.mddapi.repository.ITopicRepository;
+import com.openclassrooms.mddapi.service.ITopicService;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -18,10 +18,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TopicServiceITest {
 
     @Autowired
-    private TopicService topicService;
+    private ITopicService topicService;
 
     @Autowired
-    private TopicRepository topicRepository;
+    private ITopicRepository topicRepository;
 
     private Topic topic;
 

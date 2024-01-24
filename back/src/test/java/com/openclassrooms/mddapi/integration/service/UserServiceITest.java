@@ -5,9 +5,9 @@ import com.openclassrooms.mddapi.exception.BadRequestException;
 import com.openclassrooms.mddapi.exception.NotFoundException;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
-import com.openclassrooms.mddapi.repository.TopicRepository;
-import com.openclassrooms.mddapi.repository.UserRepository;
-import com.openclassrooms.mddapi.service.UserService;
+import com.openclassrooms.mddapi.repository.ITopicRepository;
+import com.openclassrooms.mddapi.repository.IUserRepository;
+import com.openclassrooms.mddapi.service.IUserService;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -24,13 +24,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserServiceITest {
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     @Autowired
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
 
     @Autowired
-    private TopicRepository topicRepository;
+    private ITopicRepository topicRepository;
 
     private User user;
     private Topic topic;

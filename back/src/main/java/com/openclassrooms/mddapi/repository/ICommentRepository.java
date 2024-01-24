@@ -8,7 +8,7 @@ import com.openclassrooms.mddapi.model.Comment;
 import java.util.List;
 
 @Repository
-public interface CommentRepository extends JpaRepository<Comment, Long> {
+public interface ICommentRepository extends JpaRepository<Comment, Long> {
 
     List<Comment> findByPostId(long postId);
 }

@@ -9,7 +9,7 @@ import com.openclassrooms.mddapi.payload.response.JwtResponse;
 import com.openclassrooms.mddapi.payload.response.MessageResponse;
 import com.openclassrooms.mddapi.security.jwt.JwtUtils;
 import com.openclassrooms.mddapi.security.services.UserDetailsImpl;
-import com.openclassrooms.mddapi.service.UserService;
+import com.openclassrooms.mddapi.service.IUserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +35,7 @@ public class AuthController {
     private JwtUtils jwtUtils;
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     @Autowired
     private UserMapper userMapper;

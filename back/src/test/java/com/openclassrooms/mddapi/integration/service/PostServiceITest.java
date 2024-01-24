@@ -4,10 +4,10 @@ import com.openclassrooms.mddapi.exception.NotFoundException;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
-import com.openclassrooms.mddapi.repository.PostRepository;
-import com.openclassrooms.mddapi.repository.TopicRepository;
-import com.openclassrooms.mddapi.repository.UserRepository;
-import com.openclassrooms.mddapi.service.PostService;
+import com.openclassrooms.mddapi.repository.IPostRepository;
+import com.openclassrooms.mddapi.repository.ITopicRepository;
+import com.openclassrooms.mddapi.repository.IUserRepository;
+import com.openclassrooms.mddapi.service.IPostService;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -22,16 +22,16 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PostServiceITest {
 
     @Autowired
-    private PostService postService;
+    private IPostService postService;
 
     @Autowired
-    private PostRepository postRepository;
+    private IPostRepository postRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
 
     @Autowired
-    private TopicRepository topicRepository;
+    private ITopicRepository topicRepository;
 
     private Post post;
     private User user;

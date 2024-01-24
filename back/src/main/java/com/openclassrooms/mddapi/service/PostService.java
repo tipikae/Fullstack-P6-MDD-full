@@ -2,21 +2,23 @@ package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.exception.NotFoundException;
 import com.openclassrooms.mddapi.model.Post;
-import com.openclassrooms.mddapi.repository.PostRepository;
+import com.openclassrooms.mddapi.repository.IPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class PostService implements IPostService {
 
 	@Autowired
-	private PostRepository postRepository;
+	private IPostRepository postRepository;
 
 	@Override
 	public Post create(Post post) {
+		post.setCreatedAt(LocalDateTime.now());
 		return postRepository.save(post);
 	}
 

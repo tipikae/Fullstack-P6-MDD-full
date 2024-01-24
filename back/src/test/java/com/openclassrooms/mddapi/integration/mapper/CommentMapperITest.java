@@ -7,9 +7,9 @@ import com.openclassrooms.mddapi.model.Comment;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
-import com.openclassrooms.mddapi.repository.PostRepository;
-import com.openclassrooms.mddapi.repository.TopicRepository;
-import com.openclassrooms.mddapi.repository.UserRepository;
+import com.openclassrooms.mddapi.repository.IPostRepository;
+import com.openclassrooms.mddapi.repository.ITopicRepository;
+import com.openclassrooms.mddapi.repository.IUserRepository;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -27,13 +27,13 @@ public class CommentMapperITest {
     private CommentMapper commentMapper;
 
     @Autowired
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
 
     @Autowired
-    private PostRepository postRepository;
+    private IPostRepository postRepository;
 
     @Autowired
-    private TopicRepository topicRepository;
+    private ITopicRepository topicRepository;
 
     private User author;
     private Topic topic;

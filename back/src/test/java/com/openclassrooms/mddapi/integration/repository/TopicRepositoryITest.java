@@ -1,12 +1,10 @@
 package com.openclassrooms.mddapi.integration.repository;
 
 import com.openclassrooms.mddapi.model.Topic;
-import com.openclassrooms.mddapi.repository.TopicRepository;
+import com.openclassrooms.mddapi.repository.ITopicRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TopicRepositoryITest {
 
     @Autowired
-    TopicRepository topicRepository;
+    ITopicRepository topicRepository;
 
     @Test
     void test() {

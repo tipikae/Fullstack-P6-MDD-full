@@ -5,21 +5,27 @@ import com.openclassrooms.mddapi.exception.BadRequestException;
 import com.openclassrooms.mddapi.exception.NotFoundException;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
-import com.openclassrooms.mddapi.repository.TopicRepository;
-import com.openclassrooms.mddapi.repository.UserRepository;
+import com.openclassrooms.mddapi.repository.ITopicRepository;
+import com.openclassrooms.mddapi.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
 public class UserService implements IUserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
 
     @Autowired
-    private TopicRepository topicRepository;
+    private ITopicRepository topicRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public User create(User user) throws AlreadyExistsException {
@@ -27,14 +33,28 @@ public class UserService implements IUserService {
             throw new AlreadyExistsException("Email or username is already taken.");
         }
 
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setCreatedAt(LocalDateTime.now());
         return userRepository.save(user);
     }
 
     @Override
-    public void update(long id, User user) throws NotFoundException {
-        if (!userRepository.existsById(id)) {
+    public void update(long id, User user) throws NotFoundException, AlreadyExistsException {
+        User currentUser = userRepository.findById(id).orElse(null);
+        if (currentUser == null) {
             throw new NotFoundException(String.format("User with id = %d is not found.", id));
         }
+
+        if (userRepository.existsByEmailOrUsername(user.getEmail(), user.getUsername())) {
+            throw new AlreadyExistsException("Email or username is already taken.");
+        }
+
+        user.setId(currentUser.getId());
+        user.setUpdatedAt(LocalDateTime.now());
+        if (!Objects.equals(passwordEncoder.encode(user.getPassword()), currentUser.getPassword())) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+
         userRepository.save(user);
     }
 
@@ -43,6 +63,15 @@ public class UserService implements IUserService {
         User user = userRepository.findById(id).orElse(null);
         if (user == null) {
             throw new NotFoundException(String.format("User with id = %d is not found.", id));
+        }
+        return user;
+    }
+
+    @Override
+    public User getByEmail(String email) throws NotFoundException {
+        User user = userRepository.findByEmail(email).orElse(null);
+        if (user == null) {
+            throw new NotFoundException(String.format("User with email = %s not found.", email));
         }
         return user;
     }

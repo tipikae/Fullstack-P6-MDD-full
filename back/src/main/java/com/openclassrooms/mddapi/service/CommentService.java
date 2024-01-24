@@ -4,25 +4,26 @@ import com.openclassrooms.mddapi.exception.NotFoundException;
 import com.openclassrooms.mddapi.model.Comment;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.User;
-import com.openclassrooms.mddapi.repository.CommentRepository;
-import com.openclassrooms.mddapi.repository.PostRepository;
-import com.openclassrooms.mddapi.repository.UserRepository;
+import com.openclassrooms.mddapi.repository.ICommentRepository;
+import com.openclassrooms.mddapi.repository.IPostRepository;
+import com.openclassrooms.mddapi.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class CommentService implements ICommentService {
 
     @Autowired
-    private CommentRepository commentRepository;
+    private ICommentRepository commentRepository;
 
     @Autowired
-    private PostRepository postRepository;
+    private IPostRepository postRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
 
     @Override
     public Comment addComment(Comment comment, long authorId, long postId) throws NotFoundException {
@@ -37,6 +38,7 @@ public class CommentService implements ICommentService {
 
         comment.setAuthor(user);
         comment.setPost(post);
+        comment.setCreatedAt(LocalDateTime.now());
 
         return commentRepository.save(comment);
     }

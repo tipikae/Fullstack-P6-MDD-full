@@ -5,7 +5,12 @@ import org.springframework.stereotype.Repository;
 
 import com.openclassrooms.mddapi.model.Topic;
 
+/**
+ * Topic repository.
+ * @author tipikae
+ * @version 1.0.0
+ */
 @Repository
-public interface ITopicRepository extends JpaRepository<Topic, Long> {
+public interface TopicRepository extends JpaRepository<Topic, Long> {
 
 }

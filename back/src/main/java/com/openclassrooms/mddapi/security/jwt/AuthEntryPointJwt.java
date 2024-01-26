@@ -15,11 +15,24 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Authentication exception handler.
+ * @author tipikae
+ * @version 1.0.0
+ */
 @Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthEntryPointJwt.class);
 
+    /**
+     * Intercept the rejected request.
+     * @param request Rejected request.
+     * @param response Returned response.
+     * @param authException Thrown exception.
+     * @throws IOException thrown updating the response.
+     * @throws ServletException thrown an error occurred servlet side.
+     */
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
             throws IOException, ServletException {

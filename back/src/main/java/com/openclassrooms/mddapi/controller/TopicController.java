@@ -2,7 +2,6 @@ package com.openclassrooms.mddapi.controller;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Objects;
 
 import com.openclassrooms.mddapi.exception.BadRequestException;
 import com.openclassrooms.mddapi.exception.NotFoundException;
@@ -19,6 +18,11 @@ import org.springframework.web.bind.annotation.*;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.service.ITopicService;
 
+/**
+ * Topic controller.
+ * @author tipikae
+ * @version  1.0.0
+ */
 @RestController
 @RequestMapping("/api/topic")
 @Validated
@@ -34,7 +38,15 @@ public class TopicController {
 	public List<Topic> getTopics() {
 		return topicService.getTopics();
 	}
-	
+
+	/**
+	 * Subscribe to a topic endpoint.
+	 * @param topicId Topic id.
+	 * @param principal Current user.
+	 * @return ResponseEntity
+	 * @throws NotFoundException thrown when current user or topic is not found.
+	 * @throws BadRequestException thrown when an error occurred during authentication.
+	 */
 	@PostMapping("/{topicId}/subscribe")
 	public ResponseEntity<MessageResponse> subscribe(
 			@PathVariable("topicId") @NotNull @Positive Long topicId,
@@ -50,6 +62,14 @@ public class TopicController {
 		return ResponseEntity.ok(new MessageResponse("Topic subscribed successfully !"));
 	}
 
+	/**
+	 * Unsubscribe to a topic endpoint.
+	 * @param topicId Topic id.
+	 * @param principal Current user.
+	 * @return ResponseEntity
+	 * @throws NotFoundException thrown when current user or topic is not found.
+	 * @throws BadRequestException thrown when an error occurred during authentication.
+	 */
 	@DeleteMapping("/{topicId}/subscribe")
 	public ResponseEntity<MessageResponse> unsubscribe(
 			@PathVariable("topicId") @NotNull @Positive Long topicId,

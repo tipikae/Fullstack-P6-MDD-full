@@ -9,8 +9,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
+/**
+ * Post model.
+ * @author tipikae
+ * @version 1.0.0
+ */
 @Entity
 @Table(name = "POSTS")
 @Data

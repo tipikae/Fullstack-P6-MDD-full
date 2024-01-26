@@ -9,6 +9,11 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * Post DTO.
+ * @author tipikae
+ * @version 1.0.0
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

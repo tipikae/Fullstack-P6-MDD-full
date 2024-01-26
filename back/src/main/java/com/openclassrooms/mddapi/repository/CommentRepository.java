@@ -7,8 +7,18 @@ import com.openclassrooms.mddapi.model.Comment;
 
 import java.util.List;
 
+/**
+ * Comment Repository.
+ * @author tipikae
+ * @version 1.0.0
+ */
 @Repository
-public interface ICommentRepository extends JpaRepository<Comment, Long> {
+public interface CommentRepository extends JpaRepository<Comment, Long> {
 
+    /**
+     * Find comments by post id.
+     * @param postId Post id.
+     * @return List
+     */
     List<Comment> findByPostId(long postId);
 }

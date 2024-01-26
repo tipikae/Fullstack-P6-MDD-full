@@ -23,9 +23,13 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Post controller.
+ * @author tipikae
+ * @version  1.0.0
+ */
 @RestController
 @RequestMapping("/api/post")
 @Validated
@@ -46,8 +50,17 @@ public class PostController {
     @Autowired
     private CommentMapper commentMapper;
 
+    /**
+     * Add post endpoint.
+     * @param postDto Post to add.
+     * @param principal Current user.
+     * @return ResponseEntity
+     * @throws NotFoundException thrown when the current user is not found.
+     * @throws BadRequestException thrown when an error occurred during authentication.
+     */
     @PostMapping
-    public ResponseEntity<MessageResponse> addPost(@Valid @RequestBody PostDto postDto, Principal principal) throws NotFoundException, BadRequestException {
+    public ResponseEntity<MessageResponse> addPost(@Valid @RequestBody PostDto postDto, Principal principal)
+            throws NotFoundException, BadRequestException {
         User user = userService.getByEmail(principal.getName());
         if (user == null) {
             throw new BadRequestException("Illegal operation");
@@ -59,11 +72,21 @@ public class PostController {
         return ResponseEntity.ok(new MessageResponse("Post created successfully !"));
     }
 
+    /**
+     * Get all posts endpoint.
+     * @return ResponseEntity
+     */
     @GetMapping
     public ResponseEntity<List<PostDto>> getAllPosts() {
         return ResponseEntity.ok(postMapper.toDtos(postService.findAllByCreatedAtDesc()));
     }
 
+    /**
+     * Get a post by id.
+     * @param id Post id.
+     * @return ResponseEntity
+     * @throws NotFoundException thrown when the post is not found.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<PostDetailDto> getById(@PathVariable("id") @NotNull @Positive Long id)
             throws NotFoundException {
@@ -73,6 +96,15 @@ public class PostController {
         return ResponseEntity.ok(new PostDetailDto(postMapper.toDto(post), commentMapper.toDtos(comments)));
     }
 
+    /**
+     * Add a comment endpoint.
+     * @param id Post id.
+     * @param commentDto Comment to add.
+     * @param principal Current user.
+     * @return ResponseEntity
+     * @throws NotFoundException thrown when current user or post is not found.
+     * @throws BadRequestException thrown when an error occurred during authentication.
+     */
     @PostMapping("/{id}/comment")
     public ResponseEntity<MessageResponse> addComment(
             @PathVariable("id") @NotNull @Positive Long id,

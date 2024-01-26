@@ -5,7 +5,12 @@ import org.springframework.stereotype.Repository;
 
 import com.openclassrooms.mddapi.model.Post;
 
+/**
+ * Post repository.
+ * @author tipikae
+ * @version 1.0.0
+ */
 @Repository
-public interface IPostRepository extends JpaRepository<Post, Long>{
+public interface PostRepository extends JpaRepository<Post, Long>{
 
 }

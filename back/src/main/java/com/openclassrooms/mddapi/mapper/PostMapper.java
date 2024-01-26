@@ -11,6 +11,11 @@ import org.mapstruct.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * Post mapper.
+ * @author tipikae
+ * @version 1.0.0
+ */
 @Component
 @Mapper(componentModel = "spring", uses = {UserService.class, TopicService.class}, imports = {Post.class, NotFoundException.class})
 public abstract class PostMapper implements EntityMapper<PostDto, Post> {
@@ -21,6 +26,14 @@ public abstract class PostMapper implements EntityMapper<PostDto, Post> {
     @Autowired
     TopicService topicService;
 
+    /**
+     * Convert a DTO to an entity.
+     * @param postDto DTO
+     * @return Post
+     * @throws NotFoundException thrown when entity is not found.
+     */
+
+    @Override
     @Mappings({
             @Mapping(
                     target = "author",
@@ -33,6 +46,12 @@ public abstract class PostMapper implements EntityMapper<PostDto, Post> {
     })
     public abstract Post toEntity(PostDto postDto) throws NotFoundException;
 
+    /**
+     * Convert an entity to a DTO.
+     * @param post Entity
+     * @return PostDto
+     */
+    @Override
     @Mappings({
             @Mapping( target = "authorId", source = "post.author.id"),
             @Mapping( target = "authorUsername", source = "post.author.username"),

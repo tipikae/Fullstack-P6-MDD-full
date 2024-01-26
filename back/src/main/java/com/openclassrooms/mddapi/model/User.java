@@ -11,6 +11,11 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * User model.
+ * @author tipikae
+ * @version 1.0.0
+ */
 @Entity
 @Table(name = "USERS")
 @Data

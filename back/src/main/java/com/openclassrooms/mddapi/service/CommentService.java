@@ -4,9 +4,9 @@ import com.openclassrooms.mddapi.exception.NotFoundException;
 import com.openclassrooms.mddapi.model.Comment;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.User;
-import com.openclassrooms.mddapi.repository.ICommentRepository;
-import com.openclassrooms.mddapi.repository.IPostRepository;
-import com.openclassrooms.mddapi.repository.IUserRepository;
+import com.openclassrooms.mddapi.repository.CommentRepository;
+import com.openclassrooms.mddapi.repository.PostRepository;
+import com.openclassrooms.mddapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +17,23 @@ import java.util.List;
 public class CommentService implements ICommentService {
 
     @Autowired
-    private ICommentRepository commentRepository;
+    private CommentRepository commentRepository;
 
     @Autowired
-    private IPostRepository postRepository;
+    private PostRepository postRepository;
 
     @Autowired
-    private IUserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
+    /**
+     * Add a new comment to a post.
+     * @param comment Comment to add.
+     * @param authorId Comment author id.
+     * @param postId Post id.
+     * @return Comment
+     * @throws NotFoundException thrown when author or post is not found.
+     */
     public Comment addComment(Comment comment, long authorId, long postId) throws NotFoundException {
         User user = userRepository.findById(authorId).orElse(null);
         Post post = postRepository.findById(postId).orElse(null);
@@ -43,6 +51,11 @@ public class CommentService implements ICommentService {
         return commentRepository.save(comment);
     }
 
+    /**
+     * Get comments by post id.
+     * @param postId Post id.
+     * @return List
+     */
     @Override
     public List<Comment> getCommentsByPostId(long postId) {
         return commentRepository.findByPostId(postId);

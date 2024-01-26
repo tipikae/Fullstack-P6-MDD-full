@@ -18,9 +18,19 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Controller exception handler.
+ * @author tipikae
+ * @version  1.0.0
+ */
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
+    /**
+     * BadRequestException handler.
+     * @param e exception.
+     * @return ErrorResponse
+     */
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BadRequestException.class)
@@ -28,6 +38,12 @@ public class ControllerExceptionHandler {
         return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage());
     }
 
+    /**
+     * ConstraintViolationException handler.
+     * @param e exception.
+     * @return ErrorResponse
+     * @throws JsonProcessingException thrown when an error occurred during mapping.
+     */
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ConstraintViolationException.class)
@@ -38,6 +54,12 @@ public class ControllerExceptionHandler {
         return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), mapper.writeValueAsString(errors));
     }
 
+    /**
+     * MethodArgumentNotValidException handler.
+     * @param e exception
+     * @return ErrorResponse
+     * @throws JsonProcessingException thrown when an error occurred during mapping.
+     */
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -48,6 +70,11 @@ public class ControllerExceptionHandler {
         return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), mapper.writeValueAsString(errors));
     }
 
+    /**
+     * NotFoundException handler.
+     * @param e exception
+     * @return ErrorResponse
+     */
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
@@ -55,6 +82,11 @@ public class ControllerExceptionHandler {
         return new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage());
     }
 
+    /**
+     * AlreadyExistsException handler.
+     * @param e exception
+     * @return ErrorResponse
+     */
     @ResponseBody
     @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(AlreadyExistsException.class)

@@ -23,6 +23,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Authentication controller.
+ * @author tipikae
+ * @version 1.0.0
+ */
 @RestController
 @RequestMapping("/api/auth")
 @Validated
@@ -40,6 +45,11 @@ public class AuthController {
     @Autowired
     private UserMapper userMapper;
 
+    /**
+     * Login endpoint.
+     * @param loginRequest User credentials.
+     * @return ResponseEntity
+     */
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
@@ -52,6 +62,12 @@ public class AuthController {
         return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername()));
     }
 
+    /**
+     * User registration endpoint.
+     * @param registerRequest User information.
+     * @return ResponseEntity
+     * @throws AlreadyExistsException thrown when the user's email or username already exists.
+     */
     @PostMapping("/register")
     public ResponseEntity<MessageResponse> register(@Valid @RequestBody RegisterRequest registerRequest)
             throws AlreadyExistsException {

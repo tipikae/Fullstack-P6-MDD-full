@@ -1,5 +1,10 @@
 package com.openclassrooms.mddapi.exception;
 
+/**
+ * Parent application exception.
+ * @author tipikae
+ * @version 1.0.0
+ */
 public class MddApiException extends Exception {
 
     /**

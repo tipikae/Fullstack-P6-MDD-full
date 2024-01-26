@@ -24,7 +24,7 @@ import com.openclassrooms.mddapi.service.ITopicService;
  * @version  1.0.0
  */
 @RestController
-@RequestMapping("/api/topic")
+@RequestMapping("/topic")
 @Validated
 public class TopicController {
 

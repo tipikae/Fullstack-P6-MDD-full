@@ -26,7 +26,7 @@ import java.util.Objects;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/user")
 @Validated
 public class UserController {
 

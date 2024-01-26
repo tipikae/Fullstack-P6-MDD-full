@@ -31,7 +31,7 @@ import java.util.List;
  * @version  1.0.0
  */
 @RestController
-@RequestMapping("/api/post")
+@RequestMapping("/post")
 @Validated
 public class PostController {
 

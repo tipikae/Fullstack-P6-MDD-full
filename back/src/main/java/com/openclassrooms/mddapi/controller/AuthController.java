@@ -5,11 +5,17 @@ import com.openclassrooms.mddapi.mapper.UserMapper;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.payload.request.LoginRequest;
 import com.openclassrooms.mddapi.payload.request.RegisterRequest;
+import com.openclassrooms.mddapi.payload.response.ErrorResponse;
 import com.openclassrooms.mddapi.payload.response.JwtResponse;
 import com.openclassrooms.mddapi.payload.response.MessageResponse;
 import com.openclassrooms.mddapi.security.jwt.JwtUtils;
 import com.openclassrooms.mddapi.security.services.UserDetailsImpl;
 import com.openclassrooms.mddapi.service.IUserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +56,24 @@ public class AuthController {
      * @param loginRequest User credentials.
      * @return ResponseEntity
      */
+    @Operation(summary = "Login")
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Login succeeded",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JwtResponse.class)) }
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Field not valid",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
+            ),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Unauthorized",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
+            )
+    })
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
@@ -68,6 +92,29 @@ public class AuthController {
      * @return ResponseEntity
      * @throws AlreadyExistsException thrown when the user's email or username already exists.
      */
+    @Operation(summary = "Register")
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Register succeeded",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = MessageResponse.class)) }
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Field not valid",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
+            ),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Unauthorized",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
+            ),
+            @ApiResponse(
+                    responseCode = "409",
+                    description = "User already exists",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
+            )
+    })
     @PostMapping("/register")
     public ResponseEntity<MessageResponse> register(@Valid @RequestBody RegisterRequest registerRequest)
             throws AlreadyExistsException {

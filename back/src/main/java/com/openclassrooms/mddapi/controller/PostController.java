@@ -10,10 +10,16 @@ import com.openclassrooms.mddapi.mapper.PostMapper;
 import com.openclassrooms.mddapi.model.Comment;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.User;
+import com.openclassrooms.mddapi.payload.response.ErrorResponse;
 import com.openclassrooms.mddapi.payload.response.MessageResponse;
 import com.openclassrooms.mddapi.service.ICommentService;
 import com.openclassrooms.mddapi.service.IPostService;
 import com.openclassrooms.mddapi.service.IUserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -58,6 +64,30 @@ public class PostController {
      * @throws NotFoundException thrown when the current user is not found.
      * @throws BadRequestException thrown when an error occurred during authentication.
      */
+    @Operation(summary = "Add a post")
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Post creation succeeded",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = MessageResponse.class)) }
+
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Field not valid",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
+            ),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Unauthorized",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "User or topic is not found",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
+            )
+    })
     @PostMapping
     public ResponseEntity<MessageResponse> addPost(@Valid @RequestBody PostDto postDto, Principal principal)
             throws NotFoundException, BadRequestException {
@@ -76,6 +106,20 @@ public class PostController {
      * Get all posts endpoint.
      * @return ResponseEntity
      */
+    @Operation(summary = "Get all posts")
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Returns all posts",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = List.class)) }
+
+            ),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Unauthorized",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
+            )
+    })
     @GetMapping
     public ResponseEntity<List<PostDto>> getAllPosts() {
         return ResponseEntity.ok(postMapper.toDtos(postService.findAllByCreatedAtDesc()));
@@ -87,6 +131,29 @@ public class PostController {
      * @return ResponseEntity
      * @throws NotFoundException thrown when the post is not found.
      */
+    @Operation(summary = "Get a post by id")
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Returns a post",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Post.class)) }
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Path variable not valid",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
+            ),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Unauthorized",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Post not found",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
+            )
+    })
     @GetMapping("/{id}")
     public ResponseEntity<PostDetailDto> getById(@PathVariable("id") @NotNull @Positive Long id)
             throws NotFoundException {
@@ -105,6 +172,29 @@ public class PostController {
      * @throws NotFoundException thrown when current user or post is not found.
      * @throws BadRequestException thrown when an error occurred during authentication.
      */
+    @Operation(summary = "Add a comment")
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Comment creation succeeded",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = MessageResponse.class)) }
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Field or path variable not valid",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
+            ),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Unauthorized",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "User or post not found",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
+            )
+    })
     @PostMapping("/{id}/comment")
     public ResponseEntity<MessageResponse> addComment(
             @PathVariable("id") @NotNull @Positive Long id,

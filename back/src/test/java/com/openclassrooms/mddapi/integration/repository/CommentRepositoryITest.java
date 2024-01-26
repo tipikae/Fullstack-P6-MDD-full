@@ -4,10 +4,10 @@ import com.openclassrooms.mddapi.model.Comment;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
-import com.openclassrooms.mddapi.repository.ICommentRepository;
-import com.openclassrooms.mddapi.repository.IPostRepository;
-import com.openclassrooms.mddapi.repository.ITopicRepository;
-import com.openclassrooms.mddapi.repository.IUserRepository;
+import com.openclassrooms.mddapi.repository.CommentRepository;
+import com.openclassrooms.mddapi.repository.PostRepository;
+import com.openclassrooms.mddapi.repository.TopicRepository;
+import com.openclassrooms.mddapi.repository.UserRepository;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -22,16 +22,16 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CommentRepositoryITest {
 
     @Autowired
-    private ICommentRepository commentRepository;
+    private CommentRepository commentRepository;
 
     @Autowired
-    IUserRepository userRepository;
+    UserRepository userRepository;
 
     @Autowired
-    IPostRepository postRepository;
+    PostRepository postRepository;
 
     @Autowired
-    ITopicRepository topicRepository;
+    TopicRepository topicRepository;
 
     private User author;
     private Topic topic;

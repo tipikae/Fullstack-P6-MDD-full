@@ -2,7 +2,7 @@ package com.openclassrooms.mddapi.integration.service;
 
 import com.openclassrooms.mddapi.exception.NotFoundException;
 import com.openclassrooms.mddapi.model.Topic;
-import com.openclassrooms.mddapi.repository.ITopicRepository;
+import com.openclassrooms.mddapi.repository.TopicRepository;
 import com.openclassrooms.mddapi.service.ITopicService;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -21,7 +21,7 @@ public class TopicServiceITest {
     private ITopicService topicService;
 
     @Autowired
-    private ITopicRepository topicRepository;
+    private TopicRepository topicRepository;
 
     private Topic topic;
 

@@ -1,7 +1,7 @@
 package com.openclassrooms.mddapi.integration.repository;
 
 import com.openclassrooms.mddapi.model.User;
-import com.openclassrooms.mddapi.repository.IUserRepository;
+import com.openclassrooms.mddapi.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserRepositoryITest {
 
     @Autowired
-    private IUserRepository userRepository;
+    private UserRepository userRepository;
 
     @Test
     void test() {

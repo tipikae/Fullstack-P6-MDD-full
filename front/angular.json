@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "mdd-client:build:production"
+              "buildTarget": "mdd-client:build:production"
             },
             "development": {
-              "browserTarget": "mdd-client:build:development"
+              "buildTarget": "mdd-client:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "mdd-client:build"
+            "buildTarget": "mdd-client:build"
           }
         },
         "test": {

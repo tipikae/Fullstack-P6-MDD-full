@@ -19,6 +19,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
+
+/**
+ * Security configuration.
+ * @author tipikae
+ * @version 1.0.0
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
@@ -29,6 +36,10 @@ public class WebSecurityConfig {
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
 
+    /**
+     * Authentication manager bean.
+     * @return AuthenticationManager
+     */
     @Bean
     public AuthenticationManager authenticationManager() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
@@ -38,16 +49,30 @@ public class WebSecurityConfig {
         return new ProviderManager(authenticationProvider);
     }
 
+    /**
+     * Password encoder bean.
+     * @return PassWordEncoder
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Authentication token filter.
+     * @return AuthTokenFilter
+     */
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
         return new AuthTokenFilter();
     }
 
+    /**
+     * Filter chain.
+     * @param http Http security configuration.
+     * @return SecurityFilterChain
+     * @throws Exception thrown when a security error occurred.
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -57,10 +82,16 @@ public class WebSecurityConfig {
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/h2-console/**").permitAll()
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/**").authenticated()
-                        .requestMatchers("/**").authenticated()
+                        .requestMatchers(
+                                antMatcher("/api/h2-console/**"),
+                                antMatcher("/api/v3/api-docs/**"),
+                                antMatcher("/api/swagger-ui/**"),
+                                antMatcher("/api/auth/**")
+                        ).permitAll()
+                        .requestMatchers(
+                                antMatcher("/api/**"),
+                                antMatcher("/**")
+                        ).authenticated()
                 );
 
         return http.build();

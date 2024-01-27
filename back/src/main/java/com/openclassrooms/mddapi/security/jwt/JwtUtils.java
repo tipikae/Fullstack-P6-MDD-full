@@ -17,6 +17,11 @@ import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
+/**
+ * Utilities for JsonWebToken.
+ * @author tipikae
+ * @version 1.0.0
+ */
 @Component
 public class JwtUtils {
 
@@ -28,6 +33,11 @@ public class JwtUtils {
     @Value("${mdd.jwt.expiration}")
     private int jwtExpiration;
 
+    /**
+     * Generate a token from authenticated user information.
+     * @param authentication Authentication object.
+     * @return String
+     */
     public String generateToken(Authentication authentication) {
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
         return Jwts.builder()
@@ -38,11 +48,21 @@ public class JwtUtils {
                 .compact();
     }
 
+    /**
+     * Get user username from Token.
+     * @param token Token to parse.
+     * @return String
+     */
     public String getUsernameFromJwtToken(String token) {
         return Jwts.parser().verifyWith(getSigningKey()).build()
                 .parseSignedClaims(token).getPayload().getSubject();
     }
 
+    /**
+     * Validate a token.
+     * @param token Token to validate.
+     * @return boolean
+     */
     public boolean validateJwtToken(String token) {
         try {
             Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(token);
@@ -62,6 +82,10 @@ public class JwtUtils {
         return false;
     }
 
+    /**
+     * Get signin key.
+     * @return SecretKey
+     */
     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
     }

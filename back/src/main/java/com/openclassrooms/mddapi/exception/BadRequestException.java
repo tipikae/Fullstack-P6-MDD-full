@@ -1,5 +1,10 @@
 package com.openclassrooms.mddapi.exception;
 
+/**
+ * BadRequest exception.
+ * @author tipikae
+ * @version 1.0.0
+ */
 public class BadRequestException extends MddApiException {
 
     /**

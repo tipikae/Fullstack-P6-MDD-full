@@ -1,12 +1,16 @@
 package com.openclassrooms.mddapi.payload.request;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+/**
+ * Register request POJO.
+ * @author tipikae
+ * @version 1.0.0
+ */
 @Data
 public class RegisterRequest {
 

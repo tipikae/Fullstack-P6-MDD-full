@@ -15,14 +15,28 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * User mapper.
+ * @author tipikae
+ * @version 1.0.0
+ */
 @Component
 @Mapper(componentModel = "spring", uses = {TopicService.class}, imports = {Arrays.class, Collectors.class, User.class,
         Topic.class, Collections.class, Optional.class, NotFoundException.class})
 public abstract class UserMapper implements EntityMapper<UserDto, User> {
 
+    /**
+     * Topic service.
+     */
     @Autowired
     protected TopicService topicService;
 
+    /**
+     * Convert a DTO to an entity.
+     * @param userDto DTO
+     * @return User
+     */
+    @Override
     @Mapping(
             target = "topics",
             expression = "java(Optional.ofNullable(userDto.getTopicIds()).orElseGet(Collections::emptyList).stream()" +
@@ -31,6 +45,12 @@ public abstract class UserMapper implements EntityMapper<UserDto, User> {
     )
     public abstract User toEntity(UserDto userDto);
 
+    /**
+     * Convert an entity to a DTO.
+     * @param user Entity
+     * @return UserDto
+     */
+    @Override
     @Mapping(
             target = "topicIds",
             expression = "java(Optional.ofNullable(user.getTopics()).orElseGet(Collections::emptyList).stream()" +

@@ -1,8 +1,12 @@
 package com.openclassrooms.mddapi.payload.response;
 
-import lombok.Builder;
 import lombok.Data;
 
+/**
+ * JsonWebToken response.
+ * @author tipikae
+ * @version 1.0.0
+ */
 @Data
 public class JwtResponse {
 
@@ -11,6 +15,12 @@ public class JwtResponse {
     private Long id;
     private String username;
 
+    /**
+     * Constructor.
+     * @param token Token.
+     * @param id User id.
+     * @param username User username.
+     */
     public JwtResponse(String token, Long id, String username) {
         this.token = token;
         this.id = id;

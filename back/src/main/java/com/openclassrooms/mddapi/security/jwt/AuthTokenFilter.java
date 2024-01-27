@@ -17,6 +17,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+/**
+ * Authentication filter.
+ * @author tipikae
+ * @version 1.0.0
+ */
 public class AuthTokenFilter extends OncePerRequestFilter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthTokenFilter.class);
@@ -27,6 +32,14 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
+    /**
+     * Request filter.
+     * @param request Incoming request.
+     * @param response Outcoming response.
+     * @param filterChain Filter chain.
+     * @throws ServletException thrown when an exception occurred during filter operation.
+     * @throws IOException thrown when an exception occurred during filter operation.
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -49,6 +62,11 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+    /**
+     * Get token from request header.
+     * @param request Incoming request.
+     * @return String
+     */
     private String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");
 

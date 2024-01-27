@@ -5,8 +5,8 @@ import com.openclassrooms.mddapi.exception.BadRequestException;
 import com.openclassrooms.mddapi.exception.NotFoundException;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
-import com.openclassrooms.mddapi.repository.ITopicRepository;
-import com.openclassrooms.mddapi.repository.IUserRepository;
+import com.openclassrooms.mddapi.repository.TopicRepository;
+import com.openclassrooms.mddapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,18 +15,29 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * User service.
+ * @author tipikae
+ * @version 1.0.0
+ */
 @Service
 public class UserService implements IUserService {
 
     @Autowired
-    private IUserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    private ITopicRepository topicRepository;
+    private TopicRepository topicRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Create a user.
+     * @param user User to create.
+     * @return User
+     * @throws AlreadyExistsException thrown when user already exists.
+     */
     @Override
     public User create(User user) throws AlreadyExistsException {
         if (userRepository.existsByEmailOrUsername(user.getEmail(), user.getUsername())) {
@@ -38,15 +49,32 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
+    /**
+     * Update a user.
+     * @param id User id.
+     * @param user User to update.
+     * @throws NotFoundException thrown when user is not found.
+     * @throws AlreadyExistsException thrown when user email or username is already taken.
+     */
     @Override
     public void update(long id, User user) throws NotFoundException, AlreadyExistsException {
+        // check if user exists
         User currentUser = userRepository.findById(id).orElse(null);
         if (currentUser == null) {
             throw new NotFoundException(String.format("User with id = %d is not found.", id));
         }
 
-        if (userRepository.existsByEmailOrUsername(user.getEmail(), user.getUsername())) {
-            throw new AlreadyExistsException("Email or username is already taken.");
+        // check if new email or username is already taken
+        if (!currentUser.getEmail().equals(user.getEmail()) || !currentUser.getUsername().equals(user.getUsername())) {
+            if (userRepository.findByEmail(user.getEmail()).isPresent() &&
+                    userRepository.findByEmail(user.getEmail()).get().getId() != currentUser.getId()) {
+                throw new AlreadyExistsException("Email is already taken.");
+            }
+
+            if (userRepository.findByUsername(user.getUsername()).isPresent() &&
+                    userRepository.findByUsername(user.getUsername()).get().getId() != currentUser.getId()) {
+                throw new AlreadyExistsException("Username is already taken.");
+            }
         }
 
         user.setId(currentUser.getId());
@@ -58,6 +86,12 @@ public class UserService implements IUserService {
         userRepository.save(user);
     }
 
+    /**
+     * Get a user by id.
+     * @param id User id.
+     * @return User
+     * @throws NotFoundException thrown when user is not found.
+     */
     @Override
     public User getById(long id) throws NotFoundException {
         User user = userRepository.findById(id).orElse(null);
@@ -67,6 +101,12 @@ public class UserService implements IUserService {
         return user;
     }
 
+    /**
+     * Get a user by email.
+     * @param email User email.
+     * @return User
+     * @throws NotFoundException thrown when user is not found.
+     */
     @Override
     public User getByEmail(String email) throws NotFoundException {
         User user = userRepository.findByEmail(email).orElse(null);
@@ -76,6 +116,13 @@ public class UserService implements IUserService {
         return user;
     }
 
+    /**
+     * Subscribe a user to a topic.
+     * @param userId User id.
+     * @param topicId Topic id.
+     * @throws NotFoundException thrown when user or topic is not found.
+     * @throws BadRequestException thrown when an authentication error occurred.
+     */
     @Override
     public void subscribe(long userId, long topicId) throws NotFoundException, BadRequestException {
         Topic topic = topicRepository.findById(topicId).orElse(null);
@@ -96,6 +143,13 @@ public class UserService implements IUserService {
         userRepository.save(user);
     }
 
+    /**
+     * Unsubscribe a user to a topic.
+     * @param userId User id.
+     * @param topicId Topic id.
+     * @throws NotFoundException thrown when user or topic is not found.
+     * @throws BadRequestException thrown when an authentication error occurred.
+     */
     @Override
     public void unsubscribe(long userId, long topicId) throws NotFoundException, BadRequestException {
         User user = userRepository.findById(userId).orElse(null);

@@ -1,5 +1,10 @@
 package com.openclassrooms.mddapi.exception;
 
+/**
+ * AlreadyExists exception.
+ * @author tipikae
+ * @version 1.0.0
+ */
 public class AlreadyExistsException extends MddApiException {
 
     /**

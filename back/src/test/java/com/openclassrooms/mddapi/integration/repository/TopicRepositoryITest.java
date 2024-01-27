@@ -1,7 +1,7 @@
 package com.openclassrooms.mddapi.integration.repository;
 
 import com.openclassrooms.mddapi.model.Topic;
-import com.openclassrooms.mddapi.repository.ITopicRepository;
+import com.openclassrooms.mddapi.repository.TopicRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TopicRepositoryITest {
 
     @Autowired
-    ITopicRepository topicRepository;
+    TopicRepository topicRepository;
 
     @Test
     void test() {

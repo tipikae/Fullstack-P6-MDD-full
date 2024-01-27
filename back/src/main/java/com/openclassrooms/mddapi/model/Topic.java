@@ -10,6 +10,11 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * Topic model.
+ * @author tipikae
+ * @version 1.0.0
+ */
 @Entity
 @Table(name = "TOPICS")
 @Data

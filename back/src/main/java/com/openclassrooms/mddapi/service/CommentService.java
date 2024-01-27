@@ -13,6 +13,11 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Comment service implementation.
+ * @author tipikae
+ * @version 1.0.0
+ */
 @Service
 public class CommentService implements ICommentService {
 

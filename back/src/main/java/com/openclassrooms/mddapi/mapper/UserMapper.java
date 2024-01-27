@@ -25,6 +25,9 @@ import java.util.stream.Collectors;
         Topic.class, Collections.class, Optional.class, NotFoundException.class})
 public abstract class UserMapper implements EntityMapper<UserDto, User> {
 
+    /**
+     * Topic service.
+     */
     @Autowired
     protected TopicService topicService;
 
@@ -32,7 +35,6 @@ public abstract class UserMapper implements EntityMapper<UserDto, User> {
      * Convert a DTO to an entity.
      * @param userDto DTO
      * @return User
-     * @throws NotFoundException thrown when entity is not found.
      */
     @Override
     @Mapping(

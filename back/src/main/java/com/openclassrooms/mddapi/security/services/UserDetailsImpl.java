@@ -21,8 +21,17 @@ import java.util.Objects;
 @Getter
 public class UserDetailsImpl implements UserDetails {
 
+    /**
+     * USer id.
+     */
     private Long id;
+    /**
+     * User username.
+     */
     private String username;
+    /**
+     * User password.
+     */
     @JsonIgnore
     private String password;
 

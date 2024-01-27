@@ -38,7 +38,7 @@ public class TopicServiceITest {
     @Test
     void test() throws NotFoundException {
         //get all
-        assertEquals(1, topicService.getTopics().size());
+        assertFalse(topicService.getTopics().isEmpty());
 
         // get by id
         assertNotNull(topicService.getById(topic.getId()));

@@ -58,13 +58,23 @@ public class UserService implements IUserService {
      */
     @Override
     public void update(long id, User user) throws NotFoundException, AlreadyExistsException {
+        // check if user exists
         User currentUser = userRepository.findById(id).orElse(null);
         if (currentUser == null) {
             throw new NotFoundException(String.format("User with id = %d is not found.", id));
         }
 
-        if (userRepository.existsByEmailOrUsername(user.getEmail(), user.getUsername())) {
-            throw new AlreadyExistsException("Email or username is already taken.");
+        // check if new email or username is already taken
+        if (!currentUser.getEmail().equals(user.getEmail()) || !currentUser.getUsername().equals(user.getUsername())) {
+            if (userRepository.findByEmail(user.getEmail()).isPresent() &&
+                    userRepository.findByEmail(user.getEmail()).get().getId() != currentUser.getId()) {
+                throw new AlreadyExistsException("Email is already taken.");
+            }
+
+            if (userRepository.findByUsername(user.getUsername()).isPresent() &&
+                    userRepository.findByUsername(user.getUsername()).get().getId() != currentUser.getId()) {
+                throw new AlreadyExistsException("Username is already taken.");
+            }
         }
 
         user.setId(currentUser.getId());

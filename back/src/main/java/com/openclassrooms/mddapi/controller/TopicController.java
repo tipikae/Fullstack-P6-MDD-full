@@ -29,6 +29,7 @@ import com.openclassrooms.mddapi.service.ITopicService;
  * @author tipikae
  * @version  1.0.0
  */
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/topic")
 @Validated

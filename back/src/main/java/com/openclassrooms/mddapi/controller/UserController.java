@@ -31,6 +31,7 @@ import java.util.Objects;
  * @author tipikae
  * @version 1.0.0
  */
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/user")
 @Validated

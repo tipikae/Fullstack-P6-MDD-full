@@ -4,6 +4,8 @@ import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { HomeComponent } from "./components/home/home.component";
 import { TopicComponent } from "./features/topic/topic.component";
 import { MeComponent } from "./components/me/me.component";
+import { unauthGuard } from "./guards/unauth.guard";
+import { authGuard } from "./guards/auth.guard";
 
 const routes: Routes = [
     { path: '', component: HomeComponent },

@@ -39,6 +39,7 @@ export class MeComponent implements OnInit {
                private router: Router) {}
 
   ngOnInit(): void {
+    console.log(this.sessionService.sessionInformation?.token);
     this.userService.getProfile().subscribe({
       next: (user: User) => this.form.patchValue({
         username: user.username,

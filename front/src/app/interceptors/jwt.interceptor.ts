@@ -10,10 +10,13 @@ export class JwtInterceptor implements HttpInterceptor {
     
     public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (this.sessionService.isLogged) {
-            req = req.clone({
+            /*req = req.clone({
                 setHeaders: {
                     Authorization: `Bearer ${this.sessionService.sessionInformation!.token}`
                 }
+            })*/
+            req = req.clone({
+                headers: req.headers.set('Authorization', `Bearer ${this.sessionService.sessionInformation!.token}`)
             })
         }
         return next.handle(req);

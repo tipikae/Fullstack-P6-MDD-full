@@ -31,6 +31,10 @@ public class Topic {
 	@NotNull
 	private String name;
 
+	@Size(max = 255)
+	@NotNull
+	private String description;
+
 	@Column(name = "created_at", updatable = false)
 	private LocalDateTime createdAt;
 }

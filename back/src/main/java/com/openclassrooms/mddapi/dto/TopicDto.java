@@ -24,5 +24,9 @@ public class TopicDto {
     @NotBlank(message = "Name must not be empty.")
     private String name;
 
+    @Size(max = 255, message = "Description length must be 255 max.")
+    @NotBlank(message = "Description must not be empty.")
+    private String description;
+
     private LocalDateTime createdAt;
 }

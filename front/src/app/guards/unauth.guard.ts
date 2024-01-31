@@ -9,7 +9,7 @@ export class UnauthGuard {
                  private sessionService: SessionService) {}
 
     canActivate(): boolean {
-        if (this.sessionService.isLogged) {
+        if (this.sessionService.isLoggedIn()) {
             this.router.navigate(['posts']);
             return false;
         }

@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
-import { SessionService } from "../services/session.service";
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from "@angular/router";
+import { SessionService } from "../services/session.service";
 
 @Injectable({providedIn: 'root'})
 export class AuthGuard {
@@ -9,7 +9,7 @@ export class AuthGuard {
                  private sessionService: SessionService) {}
 
     canActivate(): boolean {
-        if (!this.sessionService.isLogged) {
+        if (!this.sessionService.isLoggedIn()) {
             this.router.navigate(['login']);
             return false;
         }

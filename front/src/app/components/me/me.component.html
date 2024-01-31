@@ -16,7 +16,7 @@
             </mat-card-content>
             <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Sauvegarder</button>
             <p *ngIf="onError" class="error">An error occurred</p>
-            <p (click)="logOut()">Se déconnecter</p>
+            <a class="link" (click)="logOut()">Se déconnecter</a>
         </form>
     </mat-card>
 </div>

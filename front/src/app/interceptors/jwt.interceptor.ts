@@ -9,14 +9,12 @@ export class JwtInterceptor implements HttpInterceptor {
     constructor (private sessionService: SessionService) { }
     
     public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (this.sessionService.isLogged) {
+        if (this.sessionService.isLoggedIn()) {
             req = req.clone({
                 setHeaders: {
-                    Authorization: `Bearer ${this.sessionService.sessionInformation!.token}`
+                    Authorization: `Bearer ${this.sessionService.getSessionInformation()?.token}`
                 }
             })
-        } else {
-            console.log('User not logged in');
         }
         return next.handle(req);
     }

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SessionService } from 'src/app/services/session.service';
 import { Router } from '@angular/router';
 import { LoginRequest } from '../../models/loginRequest.model';
 import { SessionInformation } from 'src/app/models/sessionInformation.model';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-login',
@@ -42,7 +42,7 @@ export class LoginComponent {
     const loginRequest = this.form.value as LoginRequest;
     this.authService.login(loginRequest).subscribe({
       next: (response: SessionInformation) => {
-        this.sessionService.logIn(response);
+        this.sessionService.login(response);
         this.router.navigate(['posts']);
       },
       error: error => this.onError = true

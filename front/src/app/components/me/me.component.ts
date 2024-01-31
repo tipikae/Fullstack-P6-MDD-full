@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { SessionService } from 'src/app/services/session.service';
 import { UserService } from 'src/app/services/user.service';
+import { UpdateProfileRequest } from 'src/app/models/updateProfileRequest.model'
 
 @Component({
   selector: 'app-me',
@@ -39,7 +40,6 @@ export class MeComponent implements OnInit {
                private router: Router) {}
 
   ngOnInit(): void {
-    console.log(this.sessionService.sessionInformation?.token);
     this.userService.getProfile().subscribe({
       next: (user: User) => this.form.patchValue({
         username: user.username,
@@ -49,11 +49,15 @@ export class MeComponent implements OnInit {
   }
 
   public submit() :void {
-
+    const updateRequest = this.form.value as UpdateProfileRequest;
+    this.userService.updateProfile(updateRequest).subscribe({
+      next: _ => this.ngOnInit(),
+      error: _ => this.onError = true
+    });
   }
 
   public logOut(): void {
-    this.sessionService.logOut();
+    this.sessionService.logout();
     this.router.navigate(['']);
   }
 }

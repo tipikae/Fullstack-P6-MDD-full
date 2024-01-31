@@ -79,11 +79,8 @@ public class UserService implements IUserService {
 
         user.setId(currentUser.getId());
         user.setUpdatedAt(LocalDateTime.now());
-        if (!Objects.equals(passwordEncoder.encode(user.getPassword()), currentUser.getPassword())) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
 
-        userRepository.save(user);
+        userRepository.save(currentUser);
     }
 
     /**

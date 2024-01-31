@@ -5,6 +5,7 @@ import { User } from 'src/app/models/user.model';
 import { SessionService } from 'src/app/services/session.service';
 import { UserService } from 'src/app/services/user.service';
 import { UpdateProfileRequest } from 'src/app/models/updateProfileRequest.model'
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-me',
@@ -14,6 +15,7 @@ import { UpdateProfileRequest } from 'src/app/models/updateProfileRequest.model'
 export class MeComponent implements OnInit {
 
   public onError: boolean = false;
+  public onSuccess: boolean = false;
   public user: User | undefined;
 
   public form = this.fb.group({
@@ -37,7 +39,8 @@ export class MeComponent implements OnInit {
   constructor (private userService: UserService,
                private sessionService: SessionService,
                private fb: FormBuilder,
-               private router: Router) {}
+               private router: Router,
+               private matSnackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.userService.getProfile().subscribe({
@@ -51,7 +54,10 @@ export class MeComponent implements OnInit {
   public submit() :void {
     const updateRequest = this.form.value as UpdateProfileRequest;
     this.userService.updateProfile(updateRequest).subscribe({
-      next: _ => this.ngOnInit(),
+      next: _ => {
+        this.ngOnInit();
+        this.matSnackBar.open('Profile updated !', 'Close', { duration: 3000 });
+      },
       error: _ => this.onError = true
     });
   }

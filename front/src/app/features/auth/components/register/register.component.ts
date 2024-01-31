@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterRequest } from '../../models/registerRequest.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -42,12 +43,16 @@ export class RegisterComponent {
 
   constructor (private authService: AuthService,
                private fb: FormBuilder,
-               private router: Router) {}
+               private router: Router,
+               private matSnackBar: MatSnackBar) {}
 
   public submit(): void {
     const registerRequest = this.form.value as RegisterRequest;
     this.authService.register(registerRequest).subscribe({
-      next: _ => this.router.navigate(['auth/login']),
+      next: _ => {
+        this.matSnackBar.open('Registration success !', 'Close', { duration: 3000 })
+        this.router.navigate(['auth/login']);
+      },
       error: _ => this.onError = true
     })
   }

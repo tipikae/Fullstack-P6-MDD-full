@@ -1,1 +1,16 @@
-<p>my-topics works!</p>
+<div class="my-topics">
+    <h2>Abonnements</h2>
+    <div *ngIf="topics.length > 0; else noTopics">
+        <mat-card *ngFor="let topic of topics">
+            <mat-card-header>
+                <mat-card-title>{{ topic.name }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>Description: {{ topic.description }}</mat-card-content>
+            <mat-card-footer>
+                <button mat-raised-button color="primary" (click)="unsubscribe(topic.id)">Se désabonner</button>
+            </mat-card-footer>
+        </mat-card>
+    </div>
+    <ng-template #noTopics>No topic subscription yet !</ng-template>
+    <p *ngIf="onError" class="error">An error occurred</p>
+</div>

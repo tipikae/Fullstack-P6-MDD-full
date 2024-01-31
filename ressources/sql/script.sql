@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS `COMMENTS`, `SUBSCRIPTIONS`, `POSTS`, `TOPICS`, `USERS`;
 CREATE TABLE `TOPICS` (
   `id` INT PRIMARY KEY AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -45,9 +46,9 @@ ALTER TABLE `POSTS` ADD FOREIGN KEY (`topic_id`) REFERENCES `TOPICS`(`id`);
 ALTER TABLE `COMMENTS` ADD FOREIGN KEY (`user_id`) REFERENCES `USERS`(`id`);
 ALTER TABLE `COMMENTS` ADD FOREIGN KEY (`post_id`) REFERENCES `POSTS`(`id`);
 
-INSERT INTO TOPICS (name) VALUES ('JavaScript');
-INSERT INTO TOPICS (name) VALUES ('Java');
-INSERT INTO TOPICS (name) VALUES ('Python');
-INSERT INTO TOPICS (name) VALUES ('Web3');
-INSERT INTO TOPICS (name) VALUES ('Spring');
-INSERT INTO TOPICS (name) VALUES ('Angular');
+INSERT INTO TOPICS (name, description) VALUES ('JavaScript', 'Lorem ipsum');
+INSERT INTO TOPICS (name, description) VALUES ('Java', 'Lorem ipsum');
+INSERT INTO TOPICS (name, description) VALUES ('Python', 'Lorem ipsum');
+INSERT INTO TOPICS (name, description) VALUES ('Web3', 'Lorem ipsum');
+INSERT INTO TOPICS (name, description) VALUES ('Spring', 'Lorem ipsum');
+INSERT INTO TOPICS (name, description) VALUES ('Angular', 'Lorem ipsum');

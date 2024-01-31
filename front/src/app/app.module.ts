@@ -10,11 +10,13 @@ import { SharedModule } from './shared/shared.module';
 import { MeComponent } from './components/me/me.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { MyTopicsComponent } from './features/topics/components/my-topics/my-topics.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopicComponent,
+    MyTopicsComponent,
     MeComponent
   ],
   imports: [

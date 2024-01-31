@@ -8,13 +8,14 @@ import { unauthGuard } from "./guards/unauth.guard";
 import { authGuard } from "./guards/auth.guard";
 
 const routes: Routes = [
-    { path: '', component: HomeComponent },
+    { path: '', canActivate: [unauthGuard], component: HomeComponent },
     {
         path: 'auth',
+        canActivate: [unauthGuard],
         loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
     },
-    { path: 'me', component: MeComponent },
-    { path: 'topics', component: TopicComponent },
+    { path: 'me', canActivate: [authGuard], component: MeComponent },
+    { path: 'topics', canActivate: [authGuard], component: TopicComponent },
     { path: '404', component: NotFoundComponent },
     { path: '**', redirectTo: '404' }
 ];

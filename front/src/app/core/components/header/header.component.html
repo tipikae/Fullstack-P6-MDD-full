@@ -1,6 +1,14 @@
 <mat-toolbar>
-    <a class="logo" routerLink="/">
-        <img src="assets/img/logo.png">
-    </a>
+    <div>
+        <a class="logo" routerLink="/">
+            <img src="assets/img/logo.png">
+        </a>
+    </div>
+    <div *ngIf="isLoggedIn(); else notLogged">
+        <button mat-icon-button (click)="navigateToProfile()">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+    </div>
+    <ng-template #notLogged>Not logged</ng-template>
 </mat-toolbar>
 <hr>

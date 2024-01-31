@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +9,14 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  constructor (private sessionService: SessionService,
+               private router: Router) {}
+
+  public isLoggedIn(): boolean {
+    return this.sessionService.isLoggedIn();
+  }
+
+  public navigateToProfile(): void {
+    this.router.navigate(['me']);
+  }
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -64,26 +65,29 @@ public class UserService implements IUserService {
             throw new NotFoundException(String.format("User with id = %d is not found.", id));
         }
 
-        // check if new email or username is already taken
-        if (!currentUser.getEmail().equals(user.getEmail()) || !currentUser.getUsername().equals(user.getUsername())) {
-            if (userRepository.findByEmail(user.getEmail()).isPresent() &&
-                    userRepository.findByEmail(user.getEmail()).get().getId() != currentUser.getId()) {
+        // check if email is updated
+        if (!currentUser.getEmail().equals(user.getEmail())) {
+            // check if new email is already taken
+            Optional<User> optional = userRepository.findByEmail(user.getEmail());
+            if (optional.isPresent() && optional.get().getId() != currentUser.getId()) {
                 throw new AlreadyExistsException("Email is already taken.");
             }
+            currentUser.setEmail(user.getEmail());
+        }
 
-            if (userRepository.findByUsername(user.getUsername()).isPresent() &&
-                    userRepository.findByUsername(user.getUsername()).get().getId() != currentUser.getId()) {
+        // check if username is updated
+        if (!currentUser.getUsername().equals(user.getUsername())) {
+            // check if new username is already taken
+            Optional<User> optional = userRepository.findByUsername(user.getUsername());
+            if (optional.isPresent() && optional.get().getId() != currentUser.getId()) {
                 throw new AlreadyExistsException("Username is already taken.");
             }
+            currentUser.setUsername(user.getUsername());
         }
 
-        user.setId(currentUser.getId());
-        user.setUpdatedAt(LocalDateTime.now());
-        if (!Objects.equals(passwordEncoder.encode(user.getPassword()), currentUser.getPassword())) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
+        currentUser.setUpdatedAt(LocalDateTime.now());
 
-        userRepository.save(user);
+        userRepository.save(currentUser);
     }
 
     /**

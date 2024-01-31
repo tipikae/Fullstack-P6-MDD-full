@@ -6,7 +6,7 @@ import com.openclassrooms.mddapi.exception.BadRequestException;
 import com.openclassrooms.mddapi.exception.NotFoundException;
 import com.openclassrooms.mddapi.mapper.UserMapper;
 import com.openclassrooms.mddapi.model.User;
-import com.openclassrooms.mddapi.payload.request.RegisterRequest;
+import com.openclassrooms.mddapi.payload.request.UpdateProfileRequest;
 import com.openclassrooms.mddapi.payload.response.ErrorResponse;
 import com.openclassrooms.mddapi.payload.response.MessageResponse;
 import com.openclassrooms.mddapi.service.IUserService;
@@ -31,6 +31,7 @@ import java.util.Objects;
  * @author tipikae
  * @version 1.0.0
  */
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/user")
 @Validated
@@ -113,7 +114,7 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<MessageResponse> updateProfile(
             @PathVariable("id") @NotNull @Positive Long id,
-            @Valid @RequestBody RegisterRequest updateRequest,
+            @Valid @RequestBody UpdateProfileRequest updateRequest,
             Principal principal)
             throws NotFoundException, BadRequestException, AlreadyExistsException {
 
@@ -125,7 +126,6 @@ public class UserController {
         userService.update(id, User.builder()
                 .username(updateRequest.getUsername())
                 .email(updateRequest.getEmail())
-                .password(updateRequest.getPassword())
                 .build());
 
         return ResponseEntity.ok(new MessageResponse("User updated successfully !"));

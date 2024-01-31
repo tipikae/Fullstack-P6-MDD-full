@@ -36,6 +36,7 @@ import java.util.List;
  * @author tipikae
  * @version  1.0.0
  */
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/post")
 @Validated

@@ -1,7 +1,6 @@
 package com.openclassrooms.mddapi.controller;
 
 import com.openclassrooms.mddapi.exception.AlreadyExistsException;
-import com.openclassrooms.mddapi.mapper.UserMapper;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.payload.request.LoginRequest;
 import com.openclassrooms.mddapi.payload.request.RegisterRequest;
@@ -45,9 +44,6 @@ public class AuthController {
 
     @Autowired
     private IUserService userService;
-
-    @Autowired
-    private UserMapper userMapper;
 
     /**
      * Login endpoint.

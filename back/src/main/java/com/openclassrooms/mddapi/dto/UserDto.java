@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.dto;
 
+import com.openclassrooms.mddapi.model.Topic;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,7 @@ public class UserDto {
 
     private String email;
 
-    private List<Long> topicIds;
+    private List<Topic> topics;
 
     private LocalDateTime createdAt;
 

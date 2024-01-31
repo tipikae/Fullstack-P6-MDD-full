@@ -1,34 +1,44 @@
 import { Injectable } from '@angular/core';
 import { SessionInformation } from '../models/sessionInformation.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
 
-  public isLogged: boolean = false;
-  public sessionInformation: SessionInformation | undefined;
-
-  private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
-
-  public $isLogged(): Observable<boolean> {
-    return this.isLoggedSubject.asObservable();
+  public login(sessionInformation: SessionInformation): void {
+    const expiresAt = moment().add(86400, 'seconds');
+    localStorage.setItem('mdd_session', JSON.stringify(sessionInformation));
+    localStorage.setItem('mdd_expiresAt', JSON.stringify(expiresAt.valueOf()));
   }
 
-  public logIn(user: SessionInformation): void {
-    this.sessionInformation = user;
-    this.isLogged = true;
-    this.next();
+  public logout(): void {
+    localStorage.removeItem('mdd_session');
+    localStorage.removeItem('mdd_expiresAt');
   }
 
-  public logOut(): void {
-    this.sessionInformation = undefined;
-    this.isLogged = false;
-    this.next();
+  public getSessionInformation(): SessionInformation | null {
+    const sessionInformation = localStorage.getItem('mdd_session');
+    if (sessionInformation != null) {
+      return JSON.parse(sessionInformation) as SessionInformation;
+    }
+    return null;
   }
 
-  private next(): void {
-    this.isLoggedSubject.next(this.isLogged);
+  public isLoggedIn(): boolean {
+    const expiration = this.getExpiration();
+    if (expiration != null) {
+      return moment().isBefore(expiration);
+    }
+    return false;
+  }
+
+  private getExpiration(): moment.Moment | null {
+    const expiration = localStorage.getItem('mdd_expiresAt');
+    if (expiration != null) {
+      return moment(JSON.parse(expiration));
+    }
+    return null;
   }
 }

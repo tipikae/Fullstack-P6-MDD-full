@@ -23,7 +23,7 @@ public class UserDto {
 
     private String email;
 
-    private List<Long> topicIds;
+    private List<TopicDto> topics;
 
     private LocalDateTime createdAt;
 

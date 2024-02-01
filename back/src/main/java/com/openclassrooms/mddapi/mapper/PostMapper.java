@@ -3,6 +3,8 @@ package com.openclassrooms.mddapi.mapper;
 import com.openclassrooms.mddapi.dto.PostDto;
 import com.openclassrooms.mddapi.exception.NotFoundException;
 import com.openclassrooms.mddapi.model.Post;
+import com.openclassrooms.mddapi.service.ITopicService;
+import com.openclassrooms.mddapi.service.IUserService;
 import com.openclassrooms.mddapi.service.TopicService;
 import com.openclassrooms.mddapi.service.UserService;
 import org.mapstruct.Mapper;
@@ -21,10 +23,10 @@ import org.springframework.stereotype.Component;
 public abstract class PostMapper implements EntityMapper<PostDto, Post> {
 
     @Autowired
-    UserService userService;
+    IUserService userService;
 
     @Autowired
-    TopicService topicService;
+    ITopicService topicService;
 
     /**
      * Convert a DTO to an entity.

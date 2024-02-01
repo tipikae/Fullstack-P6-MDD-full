@@ -6,6 +6,7 @@ import { SessionService } from 'src/app/services/session.service';
 import { UserService } from 'src/app/services/user.service';
 import { UpdateProfileRequest } from 'src/app/models/updateProfileRequest.model'
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Topic } from 'src/app/features/topics/models/topic.model';
 
 @Component({
   selector: 'app-me',
@@ -17,6 +18,7 @@ export class MeComponent implements OnInit {
   public onError: boolean = false;
   public onSuccess: boolean = false;
   public user: User | undefined;
+  public topics: Topic[] = [];
 
   public form = this.fb.group({
     username: [
@@ -44,10 +46,13 @@ export class MeComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getProfile().subscribe({
-      next: (user: User) => this.form.patchValue({
-        username: user.username,
-        email: user.email
-      })
+      next: (user: User) => {
+        this.form.patchValue({
+          username: user.username,
+          email: user.email
+        });
+        this.topics = user.topics;
+      }
     })
   }
 

@@ -3,6 +3,8 @@ package com.openclassrooms.mddapi.mapper;
 import com.openclassrooms.mddapi.dto.CommentDto;
 import com.openclassrooms.mddapi.exception.NotFoundException;
 import com.openclassrooms.mddapi.model.Comment;
+import com.openclassrooms.mddapi.service.IPostService;
+import com.openclassrooms.mddapi.service.IUserService;
 import com.openclassrooms.mddapi.service.PostService;
 import com.openclassrooms.mddapi.service.UserService;
 import org.mapstruct.Mapper;
@@ -21,10 +23,10 @@ import org.springframework.stereotype.Component;
 public abstract class CommentMapper implements EntityMapper<CommentDto, Comment> {
 
     @Autowired
-    UserService userService;
+    IUserService userService;
 
     @Autowired
-    PostService postService;
+    IPostService postService;
 
     /**
      * Convert a DTO to an entity.

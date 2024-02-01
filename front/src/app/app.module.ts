@@ -11,12 +11,14 @@ import { MeComponent } from './components/me/me.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { MyTopicsComponent } from './features/topics/components/my-topics/my-topics.component';
+import { ListComponent } from './features/topics/components/list/list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopicComponent,
     MyTopicsComponent,
+    ListComponent,
     MeComponent
   ],
   imports: [

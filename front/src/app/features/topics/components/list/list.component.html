@@ -1,12 +1,12 @@
 <div class="topics">
     <p *ngIf="topics$.value.length == 0; else topics">No topics found</p>
     <ng-template #topics>
-        <mat-card *ngFor="let topic of topics$ | async; let i = index">
+        <mat-card *ngFor="let topic of topics$ | async">
             <mat-card-header>
                 <mat-card-title>{{ topic.name }}</mat-card-title>
             </mat-card-header>
             <mat-card-content>Description: {{ topic.description }}</mat-card-content>
-            <button *ngIf="!subscribed[i]; else already" mat-raised-button color="primary" (click)="subscribe(topic.id)">S'abonner</button>
+            <button *ngIf="!subscribed[topic.id]; else already" mat-raised-button color="primary" (click)="subscribe(topic.id)">S'abonner</button>
             <ng-template #already>
                 <button disabled>Already subscribed</button>
             </ng-template>

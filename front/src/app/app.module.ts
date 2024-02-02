@@ -12,6 +12,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { MyTopicsComponent } from './features/topics/components/my-topics/my-topics.component';
 import { ListComponent } from './features/topics/components/list/list.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ListComponent } from './features/topics/components/list/list.component'
     HttpClientModule,
     CoreModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    FlexLayoutModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }

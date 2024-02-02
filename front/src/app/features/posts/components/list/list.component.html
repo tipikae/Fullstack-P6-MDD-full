@@ -1,0 +1,19 @@
+<div class="posts">
+    <p *ngIf="posts$.value.length == 0; else list">No posts found</p>
+    <ng-template #list>
+        <mat-card *ngFor="let post of posts$ | async" routerLink="['posts', 'detail', post.id]">
+            <mat-card-header>
+                <mat-card-title>{{ post.title }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div>
+                    <div>{{ post.createdAt | date }}</div>
+                    <div>{{ post.authorUsername }}</div>
+                </div>
+                <div>
+                    <span>Content:</span><span>{{ post.content }}</span>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </ng-template>
+</div>

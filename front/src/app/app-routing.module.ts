@@ -14,6 +14,11 @@ const routes: Routes = [
         canActivate: [unauthGuard],
         loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
     },
+    {
+        path: 'posts',
+        canActivate: [authGuard],
+        loadChildren: () => import('./features/posts/posts.module').then(m => m.PostsModule)
+    },
     { path: 'me', canActivate: [authGuard], component: MeComponent },
     { path: 'topics', canActivate: [authGuard], component: ListComponent },
     { path: '404', component: NotFoundComponent },

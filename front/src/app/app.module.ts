@@ -13,6 +13,7 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { MyTopicsComponent } from './features/topics/components/my-topics/my-topics.component';
 import { ListComponent } from './features/topics/components/list/list.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     TopicComponent,
     MyTopicsComponent,
     ListComponent,
-    MeComponent
+    MeComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

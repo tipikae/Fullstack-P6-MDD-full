@@ -15,8 +15,4 @@ export class HeaderComponent {
   public isLoggedIn(): boolean {
     return this.sessionService.isLoggedIn();
   }
-
-  public navigateToProfile(): void {
-    this.router.navigate(['me']);
-  }
 }

@@ -1,10 +1,10 @@
 export interface Post {
-    id: number;
+    id?: number;
     title: string;
     content: string;
-    authorId: number;
-    authorUsername: string;
+    authorId?: number;
+    authorUsername?: string;
     topicId: number;
-    topicName: string;
-    createdAt: Date;
+    topicName?: string;
+    createdAt?: Date;
 }

@@ -11,7 +11,7 @@ import { MessageResponse } from 'src/app/models/messageResponse.model';
 export class PostService {
 
   private baseUrl: string = environment.baseUrl;
-  private pathService: string = '/posts';
+  private pathService: string = '/post';
 
   constructor(private httpClient: HttpClient) { }
 

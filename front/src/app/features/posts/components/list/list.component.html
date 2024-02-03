@@ -19,7 +19,7 @@
                     <div>{{ post.authorUsername }}</div>
                 </div>
                 <div>
-                    <span>Content: </span><span>{{ post.content }}</span>
+                    <span>Content: </span><span>{{ post.content | slice:0:50 }}</span><span *ngIf="post.content.length > 50"> ...</span>
                 </div>
             </mat-card-content>
         </mat-card>

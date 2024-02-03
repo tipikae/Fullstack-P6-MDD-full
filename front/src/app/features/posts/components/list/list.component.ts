@@ -19,8 +19,7 @@ export class ListComponent implements OnInit {
   
   ngOnInit(): void {
     this.postService.getPosts().subscribe({
-      next: (posts: Post[]) => this.posts$.next(posts),
-      error: _ => this.onError = true
+      next: (posts: Post[]) => this.posts$.next(posts)
     });
   }
 }

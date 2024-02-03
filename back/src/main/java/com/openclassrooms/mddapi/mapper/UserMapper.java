@@ -6,7 +6,6 @@ import com.openclassrooms.mddapi.exception.NotFoundException;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.service.ITopicService;
-import com.openclassrooms.mddapi.service.TopicService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;

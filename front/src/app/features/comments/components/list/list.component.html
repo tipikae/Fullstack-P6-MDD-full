@@ -1,0 +1,17 @@
+<div class="comments">
+    <h2>Commentaires</h2>
+    <p *ngIf="comments$.value.length == 0; else comments">Be the first to comment</p>
+    <ng-template #comments>
+        <mat-card *ngFor="let comment of comments$ | async">
+            <mat-card-content>
+                <div>
+                    {{ comment.authorUsername }}
+                </div>
+                <div>
+                    {{ comment.comment }}
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </ng-template>
+</div>
+<app-comment-form [postId]="postId" (refreshList)="refreshList($event)"></app-comment-form>

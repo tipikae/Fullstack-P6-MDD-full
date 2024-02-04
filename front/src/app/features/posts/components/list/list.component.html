@@ -4,7 +4,15 @@
             <button mat-raised-button color="primary" routerLink="/posts/create">Créer un article</button>
         </div>
         <div>
-
+            <span>Trier par </span>
+            <button *ngIf="order == 'asc'; else upward" mat-icon-button (click)="sortList('desc')">
+                <mat-icon>arrow_downward</mat-icon>
+            </button>
+            <ng-template #upward>
+                <button mat-icon-button (click)="sortList('asc')">
+                    <mat-icon>arrow_upward</mat-icon>
+                </button>
+            </ng-template>
         </div>
     </div>
     <p *ngIf="posts$.value.length == 0; else list">No posts found</p>

@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../../services/post.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TopicService } from 'src/app/features/topics/services/topic.service';
 import { BehaviorSubject } from 'rxjs';
 import { Topic } from 'src/app/features/topics/models/topic.model';
 import { Post } from '../../models/post.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SharedService } from 'src/app/shared/shared.service';
 
 @Component({
   selector: 'app-form',
@@ -45,7 +46,8 @@ export class FormComponent implements OnInit {
                private topicService: TopicService,
                private fb: FormBuilder,
                private router: Router,
-               private matSnackBar: MatSnackBar) {}
+               private matSnackBar: MatSnackBar,
+               private sharedService: SharedService) {}
   
   ngOnInit(): void {
     this.topicService.getTopics().subscribe({
@@ -63,5 +65,9 @@ export class FormComponent implements OnInit {
       },
       error: _ => this.matSnackBar.open('Article creation failed', 'Close', { duration: 3000 })
     });
+  }
+
+  public getErrorText(field: FormControl): string {
+    return this.sharedService.getFormControlErrorText(field);
   }
 }

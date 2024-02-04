@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { Validators, FormBuilder, FormGroupDirective } from '@angular/forms';
+import { Validators, FormBuilder, FormGroupDirective, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommentService } from '../../services/comment.service';
 import { Comment } from '../../models/comment.model';
+import { SharedService } from 'src/app/shared/shared.service';
 
 @Component({
   selector: 'app-comment-form',
@@ -28,7 +29,8 @@ export class FormComponent {
 
   constructor (private commentService: CommentService,
                private matSnackBar: MatSnackBar,
-               private fb: FormBuilder) {}
+               private fb: FormBuilder,
+               private sharedService: SharedService) {}
   
   public submit(): void {
     const comment = this.form.value as Comment;
@@ -39,5 +41,9 @@ export class FormComponent {
         this.refreshList.emit(true);
       }
     });
+  }
+
+  public getErrorText(field: FormControl): string {
+    return this.sharedService.getFormControlErrorText(field);
   }
 }

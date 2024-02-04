@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { SessionService } from 'src/app/services/session.service';
@@ -7,6 +7,7 @@ import { UserService } from 'src/app/services/user.service';
 import { UpdateProfileRequest } from 'src/app/models/updateProfileRequest.model'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Topic } from 'src/app/features/topics/models/topic.model';
+import { SharedService } from 'src/app/shared/shared.service';
 
 @Component({
   selector: 'app-me',
@@ -42,7 +43,8 @@ export class MeComponent implements OnInit {
                private sessionService: SessionService,
                private fb: FormBuilder,
                private router: Router,
-               private matSnackBar: MatSnackBar) {}
+               private matSnackBar: MatSnackBar,
+               private sharedService: SharedService) {}
 
   ngOnInit(): void {
     this.userService.getProfile().subscribe({
@@ -70,5 +72,9 @@ export class MeComponent implements OnInit {
   public logOut(): void {
     this.sessionService.logout();
     this.router.navigate(['']);
+  }
+
+  public getErrorText(field: FormControl): string {
+    return this.sharedService.getFormControlErrorText(field);
   }
 }

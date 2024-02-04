@@ -1,4 +1,7 @@
 <div class="not-found">
+    <div *ngIf="!isLogged()">
+        <img src="/src/assets/img/logo.png">
+    </div>
     <div>
         <p>Oups... Your request is not found.</p>
     </div>

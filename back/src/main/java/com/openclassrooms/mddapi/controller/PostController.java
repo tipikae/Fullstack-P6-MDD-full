@@ -94,6 +94,7 @@ public class PostController {
 
     /**
      * Get all posts endpoint.
+     * @param order Sort order.
      * @return ResponseEntity
      */
     @Operation(summary = "Get all posts")
@@ -111,8 +112,8 @@ public class PostController {
             )
     })
     @GetMapping
-    public ResponseEntity<List<PostDto>> getAllPosts() {
-        return ResponseEntity.ok(postMapper.toDtos(postService.findAllByCreatedAtDesc()));
+    public ResponseEntity<List<PostDto>> getAllPosts(@RequestParam(name = "order", defaultValue = "") String order) {
+        return ResponseEntity.ok(postMapper.toDtos(postService.findAll(order)));
     }
 
     /**

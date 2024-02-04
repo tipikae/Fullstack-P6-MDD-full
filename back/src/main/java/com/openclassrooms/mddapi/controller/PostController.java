@@ -3,13 +3,11 @@ package com.openclassrooms.mddapi.controller;
 import com.openclassrooms.mddapi.dto.PostDto;
 import com.openclassrooms.mddapi.exception.BadRequestException;
 import com.openclassrooms.mddapi.exception.NotFoundException;
-import com.openclassrooms.mddapi.mapper.CommentMapper;
 import com.openclassrooms.mddapi.mapper.PostMapper;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.payload.response.ErrorResponse;
 import com.openclassrooms.mddapi.payload.response.MessageResponse;
-import com.openclassrooms.mddapi.service.ICommentService;
 import com.openclassrooms.mddapi.service.IPostService;
 import com.openclassrooms.mddapi.service.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -46,13 +44,7 @@ public class PostController {
     private IUserService userService;
 
     @Autowired
-    private ICommentService commentService;
-
-    @Autowired
     private PostMapper postMapper;
-
-    @Autowired
-    private CommentMapper commentMapper;
 
     /**
      * Add post endpoint.

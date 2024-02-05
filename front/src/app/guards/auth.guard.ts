@@ -10,7 +10,7 @@ export class AuthGuard {
 
     canActivate(): boolean {
         if (!this.sessionService.isLoggedIn()) {
-            this.router.navigate(['home']);
+            this.router.navigate(['']);
             return false;
         }
         return true;

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PostService } from '../../services/post.service';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TopicService } from 'src/app/features/topics/services/topic.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { Topic } from 'src/app/features/topics/models/topic.model';
 import { Post } from '../../models/post.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -14,7 +14,10 @@ import { SharedService } from 'src/app/shared/shared.service';
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, OnDestroy {
+
+  private getTopicsSubscription!: Subscription;
+  private addPostSubscription!: Subscription;
 
   public onError = false;
   public topics$ = new BehaviorSubject<Topic[]>([]);
@@ -48,9 +51,14 @@ export class FormComponent implements OnInit {
                private router: Router,
                private matSnackBar: MatSnackBar,
                private sharedService: SharedService) {}
+
+  ngOnDestroy(): void {
+    if (this.getTopicsSubscription != undefined) this.getTopicsSubscription.unsubscribe();
+    if (this.addPostSubscription != undefined) this.addPostSubscription.unsubscribe();
+  }
   
   ngOnInit(): void {
-    this.topicService.getTopics().subscribe({
+    this.getTopicsSubscription = this.topicService.getTopics().subscribe({
       next: (topics: Topic[]) => this.topics$.next(topics),
       error: _ => this.onError = true
     });
@@ -58,7 +66,7 @@ export class FormComponent implements OnInit {
 
   public submit(): void {
     const post = this.form.value as Post;
-    this.postService.addPost(post).subscribe({
+    this.addPostSubscription = this.postService.addPost(post).subscribe({
       next: _ => {
         this.matSnackBar.open('Article created successfully !', 'Close', { duration: 3000 });
         this.router.navigate(['posts']);

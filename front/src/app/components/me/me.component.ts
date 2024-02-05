@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
@@ -8,13 +8,17 @@ import { UpdateProfileRequest } from 'src/app/models/updateProfileRequest.model'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Topic } from 'src/app/features/topics/models/topic.model';
 import { SharedService } from 'src/app/shared/shared.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-me',
   templateUrl: './me.component.html',
   styleUrl: './me.component.css'
 })
-export class MeComponent implements OnInit {
+export class MeComponent implements OnInit, OnDestroy {
+
+  private getProfileSubscription!: Subscription;
+  private updateProfileSubscription!: Subscription;
 
   public onError: boolean = false;
   public onSuccess: boolean = false;
@@ -47,7 +51,7 @@ export class MeComponent implements OnInit {
                private sharedService: SharedService) {}
 
   ngOnInit(): void {
-    this.userService.getProfile().subscribe({
+    this.getProfileSubscription = this.userService.getProfile().subscribe({
       next: (user: User) => {
         this.form.patchValue({
           username: user.username,
@@ -58,9 +62,14 @@ export class MeComponent implements OnInit {
     })
   }
 
+  ngOnDestroy(): void {
+    if (this.getProfileSubscription != undefined) this.getProfileSubscription.unsubscribe();
+    if (this.updateProfileSubscription != undefined) this.updateProfileSubscription.unsubscribe();
+  }
+
   public submit() :void {
     const updateRequest = this.form.value as UpdateProfileRequest;
-    this.userService.updateProfile(updateRequest).subscribe({
+    this.updateProfileSubscription = this.userService.updateProfile(updateRequest).subscribe({
       next: _ => {
         this.ngOnInit();
         this.matSnackBar.open('Profile updated !', 'Close', { duration: 3000 });

@@ -39,7 +39,6 @@ public class UserService implements IUserService {
      * @return User
      * @throws AlreadyExistsException thrown when user already exists.
      */
-    @Override
     public User create(User user) throws AlreadyExistsException {
         if (userRepository.existsByEmailOrUsername(user.getEmail(), user.getUsername())) {
             throw new AlreadyExistsException("Email or username is already taken.");
@@ -57,7 +56,6 @@ public class UserService implements IUserService {
      * @throws NotFoundException thrown when user is not found.
      * @throws AlreadyExistsException thrown when user email or username is already taken.
      */
-    @Override
     public void update(long id, User user) throws NotFoundException, AlreadyExistsException {
         // check if user exists
         User currentUser = userRepository.findById(id).orElse(null);
@@ -96,7 +94,6 @@ public class UserService implements IUserService {
      * @return User
      * @throws NotFoundException thrown when user is not found.
      */
-    @Override
     public User getById(long id) throws NotFoundException {
         User user = userRepository.findById(id).orElse(null);
         if (user == null) {
@@ -111,7 +108,6 @@ public class UserService implements IUserService {
      * @return User
      * @throws NotFoundException thrown when user is not found.
      */
-    @Override
     public User getByEmail(String email) throws NotFoundException {
         User user = userRepository.findByEmail(email).orElse(null);
         if (user == null) {
@@ -127,7 +123,6 @@ public class UserService implements IUserService {
      * @throws NotFoundException thrown when user or topic is not found.
      * @throws BadRequestException thrown when an authentication error occurred.
      */
-    @Override
     public void subscribe(long userId, long topicId) throws NotFoundException, BadRequestException {
         Topic topic = topicRepository.findById(topicId).orElse(null);
         User user = userRepository.findById(userId).orElse(null);
@@ -154,7 +149,6 @@ public class UserService implements IUserService {
      * @throws NotFoundException thrown when user or topic is not found.
      * @throws BadRequestException thrown when an authentication error occurred.
      */
-    @Override
     public void unsubscribe(long userId, long topicId) throws NotFoundException, BadRequestException {
         User user = userRepository.findById(userId).orElse(null);
         if (user == null) {

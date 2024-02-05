@@ -1,13 +1,14 @@
 package com.openclassrooms.mddapi.controller;
 
-import com.openclassrooms.mddapi.dto.PostDto;
+import com.openclassrooms.mddapi.dto.CommentDto;
 import com.openclassrooms.mddapi.exception.BadRequestException;
 import com.openclassrooms.mddapi.exception.NotFoundException;
-import com.openclassrooms.mddapi.mapper.PostMapper;
-import com.openclassrooms.mddapi.model.Post;
+import com.openclassrooms.mddapi.mapper.CommentMapper;
+import com.openclassrooms.mddapi.model.Comment;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.payload.response.ErrorResponse;
 import com.openclassrooms.mddapi.payload.response.MessageResponse;
+import com.openclassrooms.mddapi.service.ICommentService;
 import com.openclassrooms.mddapi.service.IPostService;
 import com.openclassrooms.mddapi.service.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,15 +28,18 @@ import java.security.Principal;
 import java.util.List;
 
 /**
- * Post controller.
+ * Comment controller.
  * @author tipikae
- * @version  1.0.0
+ * @version 1.0.0
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/post")
+@RequestMapping("/comment")
 @Validated
-public class PostController {
+public class CommentController {
+
+    @Autowired
+    private ICommentService commentService;
 
     @Autowired
     private IPostService postService;
@@ -44,90 +48,20 @@ public class PostController {
     private IUserService userService;
 
     @Autowired
-    private PostMapper postMapper;
+    private CommentMapper commentMapper;
 
     /**
-     * Add post endpoint.
-     * @param postDto Post to add.
-     * @param principal Current user.
-     * @return ResponseEntity
-     * @throws NotFoundException thrown when the current user is not found.
-     * @throws BadRequestException thrown when an error occurred during authentication.
-     */
-    @Operation(summary = "Add a post")
-    @ApiResponses({
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Post creation succeeded",
-                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = MessageResponse.class)) }
-
-            ),
-            @ApiResponse(
-                    responseCode = "400",
-                    description = "Field not valid",
-                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
-            ),
-            @ApiResponse(
-                    responseCode = "401",
-                    description = "Unauthorized",
-                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
-            ),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "User or topic is not found",
-                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
-            )
-    })
-    @PostMapping
-    public ResponseEntity<MessageResponse> addPost(@Valid @RequestBody PostDto postDto, Principal principal)
-            throws NotFoundException, BadRequestException {
-        User user = userService.getByEmail(principal.getName());
-        if (user == null) {
-            throw new BadRequestException("Illegal operation");
-        }
-
-        postDto.setAuthorId(user.getId());
-        postService.create(postMapper.toEntity(postDto));
-
-        return ResponseEntity.ok(new MessageResponse("Post created successfully !"));
-    }
-
-    /**
-     * Get all posts endpoint.
-     * @param order Sort order.
-     * @return ResponseEntity
-     */
-    @Operation(summary = "Get all posts")
-    @ApiResponses({
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Returns all posts",
-                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = List.class)) }
-
-            ),
-            @ApiResponse(
-                    responseCode = "401",
-                    description = "Unauthorized",
-                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
-            )
-    })
-    @GetMapping
-    public ResponseEntity<List<PostDto>> getAllPosts(@RequestParam(name = "order", defaultValue = "") String order) {
-        return ResponseEntity.ok(postMapper.toDtos(postService.findAll(order)));
-    }
-
-    /**
-     * Get a post by id.
-     * @param id Post id.
+     * Get comments of a post.
+     * @param postId Post id.
      * @return ResponseEntity
      * @throws NotFoundException thrown when the post is not found.
      */
-    @Operation(summary = "Get a post by id")
+    @Operation(summary = "Get all comments of a post.")
     @ApiResponses({
             @ApiResponse(
                     responseCode = "200",
-                    description = "Returns a post",
-                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Post.class)) }
+                    description = "Returns all comments of a post.",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = List.class)) }
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -145,10 +79,61 @@ public class PostController {
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
             )
     })
-    @GetMapping("/{id}")
-    public ResponseEntity<PostDto> getById(@PathVariable("id") @NotNull @Positive Long id)
-            throws NotFoundException {
-        Post post = postService.getById(id);
-        return ResponseEntity.ok(postMapper.toDto(post));
+    @GetMapping("/post/{postId}")
+    public ResponseEntity<List<CommentDto>> getCommentsByPostID(@PathVariable("postId") @NotNull @Positive long postId) throws NotFoundException {
+        // check if post with id=postId exists
+        postService.getById(postId);
+
+        List<Comment> comments = commentService.getCommentsByPostId(postId);
+
+        return ResponseEntity.ok(commentMapper.toDtos(comments));
+    }
+
+    /**
+     * Add a comment endpoint.
+     * @param postId Post id.
+     * @param commentDto Comment to add.
+     * @param principal Current user.
+     * @return ResponseEntity
+     * @throws NotFoundException thrown when current user or post is not found.
+     * @throws BadRequestException thrown when an error occurred during authentication.
+     */
+    @Operation(summary = "Add a comment")
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Comment creation succeeded",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = MessageResponse.class)) }
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Field or path variable not valid",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
+            ),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Unauthorized",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "User or post not found",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }
+            )
+    })
+    @PostMapping("/post/{postId}")
+    public ResponseEntity<MessageResponse> addComment(
+            @PathVariable("postId") @NotNull @Positive Long postId,
+            @Valid @RequestBody CommentDto commentDto,
+            Principal principal) throws NotFoundException, BadRequestException {
+
+        User user = userService.getByEmail(principal.getName());
+        if (user == null) {
+            throw new BadRequestException("Illegal operation");
+        }
+
+        commentService.addComment(commentMapper.toEntity(commentDto), user.getId(), postId);
+
+        return ResponseEntity.ok(new MessageResponse("Comment added successfully"));
     }
 }

@@ -56,4 +56,14 @@ public class PostService implements IPostService {
 	public List<Post> findAllByCreatedAtDesc() {
 		return postRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
 	}
+
+	/**
+	 * Get all posts.
+	 * @param order Sort order.
+	 * @return List
+	 */
+	public List<Post> findAll(String order) {
+		Sort.Direction direction = order.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+		return postRepository.findAll(Sort.by(direction, "createdAt"));
+	}
 }

@@ -1,0 +1,36 @@
+<div class="post-create">
+    <div class="">
+        <button mat-icon-button routerLink="/posts">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+    </div>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Créer un nouvel article</mat-card-title>
+        </mat-card-header>
+        <form class="post-create-form" [formGroup]="form" (ngSubmit)="submit()">
+            <mat-card-content>
+                <mat-form-field>
+                    <mat-label>Sélectionner un thème</mat-label>
+                    <mat-select formControlName="topicId">
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let topic of topics$ | async" [value]="topic.id">{{ topic.name }}</mat-option>
+                    </mat-select>
+                    <mat-error>Ce champ est requis</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Titre de l'article</mat-label>
+                    <input matInput type="text" formControlName="title">
+                    <mat-error>{{ getErrorText(form.controls.title) }}</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Contenu de l'article</mat-label>
+                    <textarea matInput type="text" formControlName="content"></textarea>
+                    <mat-error>{{ getErrorText(form.controls.content) }}</mat-error>
+                </mat-form-field>
+            </mat-card-content>
+            <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Créer</button>
+            <p *ngIf="onError"></p>
+        </form>
+    </mat-card>
+</div>

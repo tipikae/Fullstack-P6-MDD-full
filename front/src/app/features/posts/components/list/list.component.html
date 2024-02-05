@@ -1,0 +1,35 @@
+<div class="posts">
+    <div>
+        <div>
+            <button mat-raised-button color="primary" routerLink="/posts/create">Créer un article</button>
+        </div>
+        <div>
+            <span>Trier par </span>
+            <button *ngIf="order == 'asc'; else upward" mat-icon-button (click)="sortList('desc')">
+                <mat-icon>arrow_downward</mat-icon>
+            </button>
+            <ng-template #upward>
+                <button mat-icon-button (click)="sortList('asc')">
+                    <mat-icon>arrow_upward</mat-icon>
+                </button>
+            </ng-template>
+        </div>
+    </div>
+    <p *ngIf="posts$.value.length == 0; else list">No posts found</p>
+    <ng-template #list>
+        <mat-card class="card-cursor" *ngFor="let post of posts$ | async" [routerLink]="['/posts', post.id]">
+            <mat-card-header>
+                <mat-card-title>{{ post.title }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div>
+                    <div>{{ post.createdAt | date }}</div>
+                    <div>{{ post.authorUsername }}</div>
+                </div>
+                <div>
+                    <span>Content: </span><span>{{ post.content | slice:0:50 }}</span><span *ngIf="post.content.length > 50"> ...</span>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </ng-template>
+</div>

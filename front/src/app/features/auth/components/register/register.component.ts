@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterRequest } from '../../models/registerRequest.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SharedService } from 'src/app/shared/shared.service';
 
 @Component({
   selector: 'app-register',
@@ -44,7 +45,8 @@ export class RegisterComponent {
   constructor (private authService: AuthService,
                private fb: FormBuilder,
                private router: Router,
-               private matSnackBar: MatSnackBar) {}
+               private matSnackBar: MatSnackBar,
+               private sharedService: SharedService) {}
 
   public submit(): void {
     const registerRequest = this.form.value as RegisterRequest;
@@ -55,5 +57,9 @@ export class RegisterComponent {
       },
       error: _ => this.onError = true
     })
+  }
+
+  public getErrorText(field: FormControl): string {
+    return this.sharedService.getFormControlErrorText(field);
   }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-not-found',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class NotFoundComponent {
 
+  constructor (private sessionService: SessionService) {}
+
+  public isLogged(): boolean {
+    return this.sessionService.isLoggedIn();
+  }
 }

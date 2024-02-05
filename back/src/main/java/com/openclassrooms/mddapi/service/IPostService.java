@@ -32,4 +32,11 @@ public interface IPostService {
      * @return List
      */
     List<Post> findAllByCreatedAtDesc();
+
+    /**
+     * Get all posts.
+     * @param order Sort order.
+     * @return List
+     */
+    List<Post> findAll(String order);
 }

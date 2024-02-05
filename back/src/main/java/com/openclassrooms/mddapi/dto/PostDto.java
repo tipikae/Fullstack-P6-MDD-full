@@ -29,9 +29,9 @@ public class PostDto {
     @NotBlank(message = "Content must not be empty.")
     private String content;
 
-    private Long authorId;
+    private Long userId;
 
-    private String authorUsername;
+    private String userName;
 
     @NotNull(message = "Topic id must not be empty.")
     private Long topicId;

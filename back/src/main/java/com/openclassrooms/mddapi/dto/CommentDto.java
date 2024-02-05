@@ -24,9 +24,9 @@ public class CommentDto {
     @NotBlank(message = "Comment must not be empty.")
     private String comment;
 
-    private Long authorId;
+    private Long userId;
 
-    private String authorUsername;
+    private String userName;
 
     private Long postId;
 

@@ -30,7 +30,6 @@ public class CommentService implements ICommentService {
     @Autowired
     private UserRepository userRepository;
 
-    @Override
     /**
      * Add a new comment to a post.
      * @param comment Comment to add.
@@ -49,11 +48,14 @@ public class CommentService implements ICommentService {
             throw new NotFoundException(message);
         }
 
-        comment.setAuthor(user);
-        comment.setPost(post);
-        comment.setCreatedAt(LocalDateTime.now());
-
-        return commentRepository.save(comment);
+        return commentRepository.save(
+                Comment.builder()
+                        .comment(comment.getComment())
+                        .user(user)
+                        .post(post)
+                        .createdAt(LocalDateTime.now())
+                        .build()
+        );
     }
 
     /**
@@ -61,7 +63,6 @@ public class CommentService implements ICommentService {
      * @param postId Post id.
      * @return List
      */
-    @Override
     public List<Comment> getCommentsByPostId(long postId) {
         return commentRepository.findByPostId(postId);
     }

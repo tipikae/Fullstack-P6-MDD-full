@@ -56,20 +56,20 @@ public class PostMapperITest {
         Post post = Post.builder()
                 .title("title")
                 .content("content")
-                .author(user)
+                .user(user)
                 .topic(topic)
                 .build();
 
         // to dto
         PostDto postDto = postMapper.toDto(post);
-        postDto.setAuthorId(user.getId());
-        assertEquals(user.getId(), postDto.getAuthorId());
-        assertEquals("username", postDto.getAuthorUsername());
+        postDto.setUserId(user.getId());
+        assertEquals(user.getId(), postDto.getUserId());
+        assertEquals("username", postDto.getUserName());
         assertEquals(topic.getId(), postDto.getTopicId());
         assertEquals("topic-name", postDto.getTopicName());
 
         // to entity
-        assertEquals(postDto.getAuthorId(), postMapper.toEntity(postDto).getAuthor().getId());
+        assertEquals(postDto.getUserId(), postMapper.toEntity(postDto).getUser().getId());
         assertEquals(postDto.getTopicId(), postMapper.toEntity(postDto).getTopic().getId());
     }
 }

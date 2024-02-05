@@ -26,7 +26,6 @@ public class PostService implements IPostService {
 	 * @param post Post to create.
 	 * @return Post
 	 */
-	@Override
 	public Post create(Post post) {
 		post.setCreatedAt(LocalDateTime.now());
 		return postRepository.save(post);
@@ -38,7 +37,6 @@ public class PostService implements IPostService {
 	 * @return Post
 	 * @throws NotFoundException thrown when te post is not found.
 	 */
-	@Override
 	public Post getById(long id) throws NotFoundException {
 		Post post = postRepository.findById(id).orElse(null);
 		if (post == null) {
@@ -52,7 +50,6 @@ public class PostService implements IPostService {
 	 * Get all posts ordered by created date desc.
 	 * @return List
 	 */
-	@Override
 	public List<Post> findAllByCreatedAtDesc() {
 		return postRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
 	}

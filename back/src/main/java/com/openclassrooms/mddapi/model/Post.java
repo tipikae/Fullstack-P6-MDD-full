@@ -38,7 +38,7 @@ public class Post {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	@NotNull
-	private User author;
+	private User user;
 	
 	@ManyToOne
 	@JoinColumn(name = "topic_id")

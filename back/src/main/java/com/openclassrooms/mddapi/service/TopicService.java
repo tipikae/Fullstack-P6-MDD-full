@@ -26,7 +26,6 @@ public class TopicService implements ITopicService {
 	 * @return Topic
 	 * @throws NotFoundException thrown when topic is not found.
 	 */
-	@Override
 	public Topic getById(long id) throws NotFoundException {
 		Topic topic = topicRepository.findById(id).orElse(null);
 		if (topic == null) {
@@ -39,7 +38,6 @@ public class TopicService implements ITopicService {
 	 * Get all topics.
 	 * @return List
 	 */
-	@Override
 	public List<Topic> getTopics() {
 		return topicRepository.findAll();
 	}

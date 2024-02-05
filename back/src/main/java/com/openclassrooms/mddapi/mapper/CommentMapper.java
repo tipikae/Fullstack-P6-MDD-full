@@ -36,7 +36,7 @@ public abstract class CommentMapper implements EntityMapper<CommentDto, Comment>
      */
     @Override
     @Mappings({
-            @Mapping(target = "author", expression = "java(commentDto.getAuthorId() != null ? userService.getById(commentDto.getAuthorId()) : null)"),
+            @Mapping(target = "user", expression = "java(commentDto.getUserId() != null ? userService.getById(commentDto.getUserId()) : null)"),
             @Mapping(target = "post", expression = "java(commentDto.getPostId() != null ? postService.getById(commentDto.getPostId()) : null)")
     })
     public abstract Comment toEntity(CommentDto commentDto) throws NotFoundException;
@@ -48,8 +48,8 @@ public abstract class CommentMapper implements EntityMapper<CommentDto, Comment>
      */
     @Override
     @Mappings({
-            @Mapping(target = "authorId", source = "comment.author.id"),
-            @Mapping(target = "authorUsername", source = "comment.author.username"),
+            @Mapping(target = "userId", source = "comment.user.id"),
+            @Mapping(target = "userName", source = "comment.user.username"),
             @Mapping(target = "postId", source = "comment.post.id")
     })
     public abstract CommentDto toDto(Comment comment);

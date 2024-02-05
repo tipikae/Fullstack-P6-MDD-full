@@ -38,8 +38,8 @@ public abstract class PostMapper implements EntityMapper<PostDto, Post> {
     @Override
     @Mappings({
             @Mapping(
-                    target = "author",
-                    expression = "java(postDto.getAuthorId() != null ? userService.getById(postDto.getAuthorId()): null)"
+                    target = "user",
+                    expression = "java(postDto.getUserId() != null ? userService.getById(postDto.getUserId()): null)"
             ),
             @Mapping(
                     target = "topic",
@@ -55,8 +55,8 @@ public abstract class PostMapper implements EntityMapper<PostDto, Post> {
      */
     @Override
     @Mappings({
-            @Mapping( target = "authorId", source = "post.author.id"),
-            @Mapping( target = "authorUsername", source = "post.author.username"),
+            @Mapping( target = "userId", source = "post.user.id"),
+            @Mapping( target = "userName", source = "post.user.username"),
             @Mapping( target = "topicId", source = "post.topic.id"),
             @Mapping( target = "topicName", source = "post.topic.name")
     })

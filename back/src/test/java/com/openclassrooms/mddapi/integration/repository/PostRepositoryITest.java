@@ -58,7 +58,7 @@ public class PostRepositoryITest {
                 Post.builder()
                         .title("post-title")
                         .content("post-content")
-                        .author(author)
+                        .user(author)
                         .topic(topic)
                         .build());
         assertNotNull(post);

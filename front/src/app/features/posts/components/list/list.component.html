@@ -24,7 +24,7 @@
             <mat-card-content>
                 <div>
                     <div>{{ post.createdAt | date }}</div>
-                    <div>{{ post.authorUsername }}</div>
+                    <div>{{ post.userName }}</div>
                 </div>
                 <div>
                     <span>Content: </span><span>{{ post.content | slice:0:50 }}</span><span *ngIf="post.content.length > 50"> ...</span>

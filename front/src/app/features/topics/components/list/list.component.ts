@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TopicService } from '../../services/topic.service';
 import { Topic } from '../../models/topic.model';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
@@ -31,6 +31,20 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.initTopics();
+  }
+
+  subscribe(id: number): void {
+    this.subscribeSubscription = this.topicService.subscribe(id).subscribe({
+      next: _ => {
+        this.matSnackBar.open('Subscription success !', 'Close', { duration: 3000 });
+        this.initTopics();
+      },
+      error: _ => this.matSnackBar.open('Subscription failed', 'Close', { duration: 3000 })
+    });
+  }
+
+  private initTopics(): void {
     this.getTopicsSubscription = this.topicService.getTopics().subscribe({
       next: (topics: Topic[]) => {
         this.getProfileSubscription = this.userService.getProfile().subscribe({
@@ -43,18 +57,9 @@ export class ListComponent implements OnInit, OnDestroy {
     });
   }
 
-  subscribe(id: number): void {
-    this.subscribeSubscription = this.topicService.subscribe(id).subscribe({
-      next: _ => {
-        this.subscribed[id] = true;
-        this.matSnackBar.open('Subscription success !', 'Close', { duration: 3000 });
-      },
-      error: _ => this.matSnackBar.open('Subscription failed', 'Close', { duration: 3000 })
-    });
-  }
-
   private setSubscribed(topics: Topic[], user: User): void {
     let myTopicIds = user.topics.map(topic => topic.id);
+    this.subscribed = [];
     topics.forEach(topic => {
       if (myTopicIds.includes(topic.id)) {
         this.subscribed[topic.id] = true;

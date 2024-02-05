@@ -65,7 +65,7 @@ public class PostServiceITest {
                 Post.builder()
                         .title("itest-title")
                         .content("itest-content")
-                        .author(user)
+                        .user(user)
                         .topic(topic)
                         .build());
         assertNotNull(post);

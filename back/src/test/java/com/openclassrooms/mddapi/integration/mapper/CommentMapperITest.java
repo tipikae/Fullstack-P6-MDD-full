@@ -55,7 +55,7 @@ public class CommentMapperITest {
                         .title("title")
                         .content("content")
                         .topic(topic)
-                        .author(author)
+                        .user(author)
                         .build());
     }
 
@@ -71,18 +71,18 @@ public class CommentMapperITest {
         Comment comment = Comment.builder()
                 .comment("comment")
                 .post(post)
-                .author(author)
+                .user(author)
                 .build();
 
         // to dto
         CommentDto commentDto = commentMapper.toDto(comment);
         assertEquals(comment.getPost().getId(), commentDto.getPostId());
-        assertEquals(comment.getAuthor().getId(), commentDto.getAuthorId());
-        assertEquals(comment.getAuthor().getUsername(), commentDto.getAuthorUsername());
+        assertEquals(comment.getUser().getId(), commentDto.getUserId());
+        assertEquals(comment.getUser().getUsername(), commentDto.getUserName());
 
         // to entity
         assertEquals(comment.getComment(), commentMapper.toEntity(commentDto).getComment());
-        assertEquals(comment.getAuthor().getId(), commentMapper.toEntity(commentDto).getAuthor().getId());
+        assertEquals(comment.getUser().getId(), commentMapper.toEntity(commentDto).getUser().getId());
         assertEquals(comment.getPost().getId(), commentMapper.toEntity(commentDto).getPost().getId());
     }
 }

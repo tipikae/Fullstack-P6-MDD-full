@@ -30,10 +30,12 @@ public class User {
 
     @Size(max = 50)
     @NotNull
+    @Column(unique = true)
     private String username;
 
     @Size(max = 255)
     @NotNull
+    @Column(unique = true)
     private String email;
 
     @Size(max = 255)

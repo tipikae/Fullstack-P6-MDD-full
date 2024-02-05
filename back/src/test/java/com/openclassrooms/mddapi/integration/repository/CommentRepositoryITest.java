@@ -55,7 +55,7 @@ public class CommentRepositoryITest {
                 Post.builder()
                         .title("title")
                         .content("content")
-                        .author(author)
+                        .user(author)
                         .topic(topic)
                         .build());
     }
@@ -73,7 +73,7 @@ public class CommentRepositoryITest {
         Comment comment = commentRepository.save(
                 Comment.builder()
                         .comment("comment")
-                        .author(author)
+                        .user(author)
                         .post(post)
                         .build());
         assertNotNull(comment);

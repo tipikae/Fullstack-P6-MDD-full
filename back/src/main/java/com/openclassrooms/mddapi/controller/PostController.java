@@ -86,7 +86,7 @@ public class PostController {
             throw new BadRequestException("Illegal operation");
         }
 
-        postDto.setAuthorId(user.getId());
+        postDto.setUserId(user.getId());
         postService.create(postMapper.toEntity(postDto));
 
         return ResponseEntity.ok(new MessageResponse("Post created successfully !"));

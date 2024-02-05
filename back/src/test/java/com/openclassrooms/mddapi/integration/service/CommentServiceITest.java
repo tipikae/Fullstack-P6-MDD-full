@@ -59,7 +59,7 @@ public class CommentServiceITest {
                 .title("itest-comment-title")
                 .content("itest-comment-content")
                 .topic(topic)
-                .author(user)
+                .user(user)
                 .build());
     }
 

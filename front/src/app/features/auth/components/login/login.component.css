@@ -1,0 +1,30 @@
+.login {
+    mat-card {
+        box-shadow: none;
+    }
+    .header {
+        display: none;
+    }
+    .logo-card {
+        display: block;
+    }
+    .back-icon {
+        font-size: 36px;
+    }
+    .card-title {
+        margin-bottom: 20px;
+    }
+}
+@media screen and (min-width: 960px) {
+    .login {
+        .header {
+            display: block;
+        }
+        .logo-card {
+            display: none !important;
+        }
+        .form-field-w-250 {
+            width: 250px;
+        }
+    }
+}

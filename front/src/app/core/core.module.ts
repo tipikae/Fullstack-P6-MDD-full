@@ -14,7 +14,6 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     RouterModule,
-    BrowserAnimationsModule,
     SharedModule
   ],
   exports: [

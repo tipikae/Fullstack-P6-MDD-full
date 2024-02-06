@@ -1,15 +1,16 @@
 <div class="header">
-    <mat-toolbar>
+    <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
         <div class="logo">
             <a routerLink="">
                 <img src="assets/img/logo.png">
             </a>
         </div>
-        <a mat-button routerLink="posts">Articles</a>
-        <a mat-button routerLink="topics">Thèmes</a>
-        <button mat-icon-button routerLink="me">
-            <mat-icon>account_circle</mat-icon>
-        </button>
+        <div class="menu" *ngIf="isLoggedIn()" fxLayout="row">
+            <a mat-button routerLink="posts">Articles</a>
+            <a mat-button routerLink="topics">Thèmes</a>
+            <button class="btn-profile" mat-icon-button routerLink="me">
+                <mat-icon [inline]="true">account_circle</mat-icon>
+            </button>
+        </div>
     </mat-toolbar>
-    <hr>
 </div>

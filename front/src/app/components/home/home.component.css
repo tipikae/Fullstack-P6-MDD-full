@@ -1,0 +1,17 @@
+.home {
+    padding: 50px;
+    .logo {
+        margin-bottom: 50px;
+    }
+}
+@media screen and (min-width: 960px) {
+    .home {
+        padding: 100px;
+        .logo {
+            margin-bottom: 100px;
+        }
+        .logo img {
+            width: 250px;
+        }
+    }
+}

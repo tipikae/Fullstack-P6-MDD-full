@@ -5,12 +5,28 @@
                 <img src="assets/img/logo.png">
             </a>
         </div>
-        <div class="menu" *ngIf="isLoggedIn()" fxLayout="row">
-            <a mat-button routerLink="posts">Articles</a>
-            <a mat-button routerLink="topics">Thèmes</a>
+        <div class="menu" *ngIf="isLoggedIn()" fxLayout="row" fxLayoutGap="30px" fxShow="true"fxHide.lt-md="true">
+            <a mat-button routerLink="posts" routerLinkActive="active">Articles</a>
+            <a mat-button routerLink="topics" routerLinkActive="active">Thèmes</a>
             <button class="btn-profile" mat-icon-button routerLink="me">
                 <mat-icon [inline]="true">account_circle</mat-icon>
             </button>
         </div>
+        <div fxShow="true" fxHide.gt-sm="true">
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </div>
     </mat-toolbar>
+    <mat-sidenav-container hasBackdrop="true">
+        <mat-sidenav #sidenav fxFlexFill fxLayout="column" fxHide.gt-sm="true" opened="false" mode="over" position="end">
+            <div fxLayout="column" fxLayoutAlign="none end" fxLayoutGap="10px">
+                <a mat-button routerLink="posts" routerLinkActive="active">Articles</a>
+                <a mat-button routerLink="topics" routerLinkActive="active">Thèmes</a>
+                <button class="btn-profile" mat-icon-button routerLink="me">
+                    <mat-icon [inline]="true">account_circle</mat-icon>
+                </button>
+            </div>
+        </mat-sidenav>
+    </mat-sidenav-container>
 </div>

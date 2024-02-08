@@ -5,7 +5,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { CoreModule } from 'src/app/core/core.module';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -16,8 +15,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     CommonModule,
     SharedModule,
     AuthRoutingModule,
-    CoreModule,
-    FlexLayoutModule
+    CoreModule
   ]
 })
 export class AuthModule { }

@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { RouterModule } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from '../shared/shared.module';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
@@ -15,8 +13,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   imports: [
     CommonModule,
     RouterModule,
-    SharedModule,
-    FlexLayoutModule
+    SharedModule
   ],
   exports: [
     HeaderComponent

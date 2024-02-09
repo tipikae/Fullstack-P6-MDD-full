@@ -21,9 +21,9 @@
     <mat-sidenav-container hasBackdrop="true">
         <mat-sidenav #sidenav fxFlexFill fxLayout="column" fxHide.gt-xs="true" opened="false" mode="over" position="end">
             <div fxLayout="column" fxLayoutAlign="none end" fxLayoutGap="10px">
-                <a mat-button routerLink="posts" routerLinkActive="active">Articles</a>
-                <a mat-button routerLink="topics" routerLinkActive="active">Thèmes</a>
-                <button class="btn-profile" mat-icon-button routerLink="me">
+                <a mat-button routerLink="posts" routerLinkActive="active" (click)="sidenav.toggle()">Articles</a>
+                <a mat-button routerLink="topics" routerLinkActive="active" (click)="sidenav.toggle()">Thèmes</a>
+                <button class="btn-profile" mat-icon-button routerLink="me" (click)="sidenav.toggle()">
                     <mat-icon [inline]="true">account_circle</mat-icon>
                 </button>
             </div>

@@ -6,6 +6,7 @@
         background-color: #e9edfd;
         box-shadow: none;
         margin-bottom: 20px;
+        border-radius: 5px;
     }
     .post-card mat-card-header, .post-card .info {
         margin-bottom: 15px;;

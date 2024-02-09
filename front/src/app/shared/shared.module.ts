@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedService } from './shared.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
@@ -17,7 +18,8 @@ import { SharedService } from './shared.service';
   exports: [
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    FlexLayoutModule
   ],
   providers: [
     SharedService

@@ -1,8 +1,8 @@
-<div class="not-found">
-    <div *ngIf="!isLogged()">
+<div class="not-found" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="50px" fxLayoutGap.gt-xs="100px">
+    <div class="logo" *ngIf="!isLogged()">
         <img src="assets/img/logo.png">
     </div>
     <div>
-        <p>Oups... Your request is not found.</p>
+        <p>Oups... Your request is not found !</p>
     </div>
 </div>

@@ -1,0 +1,36 @@
+.post-create {
+    padding: 20px;
+    width: 100%;
+    .btn-back {
+        display: inline-flex;
+        padding: 5px;
+    }
+    .btn-back mat-icon {
+        font-size: 36px;
+    }
+    mat-card {
+        width: 100%;
+        box-shadow: none;
+    }
+    .mat-mdc-text-field-wrapper {
+        border: 1px solid #7763c5;
+        border-radius: 5px;
+        background-color: white;
+    }
+    button[type="submit"] {
+        width: 200px;
+        border-radius: 5px;
+        margin: auto;
+        margin-top: 20px;
+    }
+}
+@media screen and (min-width: 600px) {
+    .post-create {
+        .col-33 {
+            width: 33%;
+        }
+        mat-card {
+            width: 400px;
+        }
+    }
+}

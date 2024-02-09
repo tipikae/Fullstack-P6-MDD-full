@@ -1,15 +1,15 @@
-<div class="post-create">
-    <div class="">
-        <button mat-icon-button routerLink="/posts">
-            <mat-icon>arrow_back</mat-icon>
+<div class="post-create" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start start">
+    <div class="col-33" fxLayout="row" fxLayoutAlign="start start">
+        <button class="btn-back" mat-icon-button routerLink="/posts">
+            <mat-icon [inline]="true">arrow_back</mat-icon>
         </button>
     </div>
-    <mat-card>
-        <mat-card-header>
+    <mat-card fxLayout="column">
+        <mat-card-header fxLayoutAlign="center">
             <mat-card-title>Créer un nouvel article</mat-card-title>
         </mat-card-header>
-        <form class="post-create-form" [formGroup]="form" (ngSubmit)="submit()">
-            <mat-card-content>
+        <form class="post-create-form" [formGroup]="form" (ngSubmit)="submit()" fxLayout="column">
+            <mat-card-content fxLayout="column" fxLayoutGap="10px">
                 <mat-form-field>
                     <mat-label>Sélectionner un thème</mat-label>
                     <mat-select formControlName="topicId">

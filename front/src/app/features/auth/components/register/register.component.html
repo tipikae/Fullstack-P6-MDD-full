@@ -1,31 +1,41 @@
 <div class="register">
+    <app-header></app-header>
     <mat-card>
-        <button mat-icon-button routerLink="">
-            <mat-icon>arrow_back</mat-icon>
-        </button>
-        <mat-card-header>
-            <mat-card-title>Inscription</mat-card-title>
-        </mat-card-header>
-        <form class="register-form" [formGroup]="form" (ngSubmit)="submit()">
-            <mat-card-content>
-                <mat-form-field>
+        <div fxLayout="row" fxLayout.lt-sm="column">
+            <button mat-icon-button routerLink="">
+                <mat-icon class="back-icon" [inline]="true">arrow_back</mat-icon>
+            </button>
+            <div class="logo-card" fxLayoutAlign="center">
+                <img src="assets/img/logo.png">
+            </div>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="center center">
+            <mat-card-header>
+                <mat-card-title class="card-title">Inscription</mat-card-title>
+            </mat-card-header>
+            <form class="register-form" [formGroup]="form" (ngSubmit)="submit()">
+                <mat-card-content fxLayout="column">
                     <mat-label>Nom d'utilisateur</mat-label>
-                    <input matInput type="text" formControlName="username">
-                    <mat-error>{{ getErrorText(form.controls.username) }}</mat-error>
-                </mat-form-field>
-                <mat-form-field>
+                    <mat-form-field class="form-field-w-250" appearance="outline">
+                        <input matInput type="text" formControlName="username">
+                        <mat-error>{{ getErrorText(form.controls.username) }}</mat-error>
+                    </mat-form-field>
                     <mat-label>Adresse e-mail</mat-label>
-                    <input matInput type="email" formControlName="email">
-                    <mat-error>{{ getErrorText(form.controls.email) }}</mat-error>
-                </mat-form-field>
-                <mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <input matInput type="email" formControlName="email">
+                        <mat-error>{{ getErrorText(form.controls.email) }}</mat-error>
+                    </mat-form-field>
                     <mat-label>Mot de passe</mat-label>
-                    <input matInput type="password" formControlName="password">
-                    <mat-error>{{ getErrorText(form.controls.password) }}</mat-error>
-                </mat-form-field>
-            </mat-card-content>
-            <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">S'inscrire</button>
-            <p *ngIf="onError" class="error">An error occurred during registration</p>
-        </form>
+                    <mat-form-field appearance="outline">
+                        <input matInput type="password" formControlName="password">
+                        <mat-error>{{ getErrorText(form.controls.password) }}</mat-error>
+                    </mat-form-field>
+                </mat-card-content>
+                <div fxLayoutAlign="center">
+                    <button class="btn" mat-raised-button color="primary" type="submit" [disabled]="form.invalid">S'inscrire</button>
+                    <p *ngIf="onError" class="error">An error occurred during registration</p>
+                </div>
+            </form>
+        </div>
     </mat-card>
 </div>

@@ -1,0 +1,32 @@
+.comments {
+    margin-top: 20px;
+    width: 100%;
+    position: relative;
+    mat-card-content {
+        width: 100%;
+    }
+    .comment {
+        border-radius: 5px;
+        background-color: #e9edfd;
+        padding: 5px;
+    }
+    .username {
+        margin-left: auto;
+        margin-right: 0;
+    }
+}
+@media screen and (min-width: 600px) {
+    .comments {
+        h3 {
+            margin-top: 20px;
+        }
+        .username {
+            margin-left: 0;
+            margin-right: 10px;
+        }
+        .comment {
+            width: 100%;
+            margin-right: 50px;
+        }
+    }
+}

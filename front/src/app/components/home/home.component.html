@@ -1,9 +1,9 @@
-<div class="home">
+<div class="home" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="50px" fxLayoutGap.gt-xs="100px">
     <div class="logo">
         <img src="assets/img/logo.png">
     </div>
-    <div>
-        <button mat-raised-button routerLink="/auth/login">Se connecter</button>
-        <button mat-raised-button routerLink="/auth/register">S'inscrire</button>
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="40px">
+        <button class="btn btn-border-black-1 btn-radius-5" mat-raised-button routerLink="/auth/login">Se connecter</button>
+        <button class="btn btn-border-black-1 btn-radius-5" mat-raised-button routerLink="/auth/register">S'inscrire</button>
     </div>
 </div>

@@ -1,3 +1,43 @@
-.card-cursor {
-    cursor: pointer;
+.posts {
+    padding: 30px;
+    .post-card {
+        cursor: pointer;
+        width: 250px;
+        background-color: #e9edfd;
+        box-shadow: none;
+        margin-bottom: 20px;
+        border-radius: 5px;
+    }
+    .post-card mat-card-header, .post-card .info {
+        margin-bottom: 15px;;
+    }
+    .content {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
+        -webkit-box-orient: vertical;
+    }
+}
+@media screen and (min-width: 600px) and (max-width: 739px) {
+    .posts {
+        .post-card {
+            width: 250px;
+        }
+        .content {
+            -webkit-line-clamp: 5;
+            line-clamp: 5;
+        }
+    }
+}
+@media screen and (min-width: 740px) {
+    .posts {
+        .post-card {
+            width: 320px;
+        }
+        .content {
+            -webkit-line-clamp: 5;
+            line-clamp: 5;
+        }
+    }
 }

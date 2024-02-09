@@ -1,12 +1,12 @@
 
-<form class="form-comment" [formGroup]="form" (ngSubmit)="submit()">
+<form class="form-comment" [formGroup]="form" (ngSubmit)="submit()" fxLayout="row" fxLayoutAlign="end center">
     <mat-form-field>
         <mat-label>Écrivez ici votre commentaire</mat-label>
         <textarea matInput formControlName="comment"></textarea>
         <mat-error>{{ getErrorText(form.controls.comment) }}</mat-error>
     </mat-form-field>
-    <button mat-icon-button [disabled]="form.invalid">
-        <mat-icon>send</mat-icon>
+    <button class="btn-send" mat-icon-button [disabled]="form.invalid">
+        <mat-icon [inline]="true" color="primary">send</mat-icon>
     </button>
     <p *ngIf="onError">An error occurred</p>
 </form>

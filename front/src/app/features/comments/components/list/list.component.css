@@ -17,6 +17,7 @@
 }
 @media screen and (min-width: 600px) {
     .comments {
+        width: 80%;
         h3 {
             margin-top: 20px;
         }
@@ -25,7 +26,7 @@
             margin-right: 10px;
         }
         .comment {
-            width: 80%;
+            width: 100%;
         }
     }
 }

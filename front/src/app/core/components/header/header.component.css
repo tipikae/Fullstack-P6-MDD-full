@@ -63,5 +63,8 @@
         .menu a {
             font-size: 18px;
         }
+        .btn-profile {
+            margin-top: 0;
+        }
     }
 }

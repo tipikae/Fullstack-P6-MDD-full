@@ -1,15 +1,19 @@
 <div class="topics">
-    <p *ngIf="topics$.value.length == 0; else topics">No topics found</p>
+    <p *ngIf="topics$.value.length == 0; else topics" fxLayout="row" fxLayoutAlign="center center">No topics found</p>
     <ng-template #topics>
-        <mat-card *ngFor="let topic of topics$ | async">
-            <mat-card-header>
-                <mat-card-title>{{ topic.name }}</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>Description: {{ topic.description }}</mat-card-content>
-            <button *ngIf="!subscribed[topic.id]; else already" mat-raised-button color="primary" (click)="subscribe(topic.id)">S'abonner</button>
-            <ng-template #already>
-                <button disabled>Already subscribed</button>
-            </ng-template>
-        </mat-card>
+        <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="start start" fxLayoutAlign.lt-sm="start center" fxLayoutGap="10px">
+            <mat-card class="topic-card" *ngFor="let topic of topics$ | async">
+                <mat-card-header>
+                    <mat-card-title>{{ topic.name }}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content><span class="description">Description: {{ topic.description }}</span></mat-card-content>
+                <div fxLayout fxLayoutAlign="center">
+                    <button class="btn-sub" *ngIf="!subscribed[topic.id]; else already" mat-raised-button color="primary" (click)="subscribe(topic.id)">S'abonner</button>
+                    <ng-template #already>
+                        <button class="btn-sub" disabled>Already subscribed</button>
+                    </ng-template>
+                </div>
+            </mat-card>
+        </div>
     </ng-template>
 </div>

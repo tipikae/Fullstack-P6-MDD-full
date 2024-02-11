@@ -33,7 +33,7 @@ public class PostDto {
 
     private String userName;
 
-    @NotNull(message = "Topic id must not be empty.")
+    @NotNull(message = "Topic must not be empty.")
     private Long topicId;
 
     private String topicName;

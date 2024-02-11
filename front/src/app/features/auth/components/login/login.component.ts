@@ -7,6 +7,9 @@ import { SessionInformation } from 'src/app/models/sessionInformation.model';
 import { SessionService } from 'src/app/services/session.service';
 import { Subscription } from 'rxjs';
 
+/**
+ * Login component.
+ */
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -34,15 +37,28 @@ export class LoginComponent implements OnDestroy {
     ]
   });
 
+  /**
+   * LoginComponent constructor.
+   * @param authService  Auth service.
+   * @param fb Form builder.
+   * @param router Router.
+   * @param sessionService Session service.
+   */
   constructor (private authService: AuthService,
                private fb: FormBuilder,
                private router: Router,
                private sessionService: SessionService) {}
-  
+
+  /**
+   * Call on destroy.
+   */
   ngOnDestroy(): void {
     if(this.loginSubscription != undefined) this.loginSubscription.unsubscribe();
   }
 
+  /**
+   * Submit login form.
+   */
   public submit(): void {
     const loginRequest = this.form.value as LoginRequest;
     this.loginSubscription = this.authService.login(loginRequest).subscribe({

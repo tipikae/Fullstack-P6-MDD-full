@@ -6,6 +6,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
 
+/**
+ * Topics list component.
+ */
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -20,20 +23,36 @@ export class ListComponent implements OnInit, OnDestroy {
   public topics$: BehaviorSubject<Topic[]> = new BehaviorSubject<Topic[]>([]);
   public subscribed: boolean[] = [];
 
+  /**
+   * ListComponent constructor.
+   * @param topicService Topic service.
+   * @param userService User service.
+   * @param matSnackBar Material snack bar.
+   */
   constructor (private topicService: TopicService,
                private userService: UserService,
                private matSnackBar: MatSnackBar) {}
 
+  /**
+   * Init component.
+   */
+  ngOnInit(): void {
+    this.initTopics();
+  }
+
+  /**
+   * Call on destroy.
+   */
   ngOnDestroy(): void {
     if (this.getTopicsSubscription != undefined) this.getTopicsSubscription.unsubscribe();
     if (this.getProfileSubscription != undefined) this.getProfileSubscription.unsubscribe();
     if (this.subscribeSubscription != undefined) this.subscribeSubscription.unsubscribe();
   }
 
-  ngOnInit(): void {
-    this.initTopics();
-  }
-
+  /**
+   * Subscribe to a topic.
+   * @param id Topic id.
+   */
   subscribe(id: number): void {
     this.subscribeSubscription = this.topicService.subscribe(id).subscribe({
       next: _ => {
@@ -44,6 +63,9 @@ export class ListComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Initialize topics list.
+   */
   private initTopics(): void {
     this.getTopicsSubscription = this.topicService.getTopics().subscribe({
       next: (topics: Topic[]) => {
@@ -57,6 +79,11 @@ export class ListComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Set already topics subscribed by user.
+   * @param topics Topics list.
+   * @param user Current user.
+   */
   private setSubscribed(topics: Topic[], user: User): void {
     let myTopicIds = user.topics.map(topic => topic.id);
     this.subscribed = [];

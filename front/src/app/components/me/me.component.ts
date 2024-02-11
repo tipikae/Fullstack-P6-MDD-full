@@ -12,6 +12,9 @@ import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorResponse } from 'src/app/models/errorResponse.model';
 
+/**
+ * User profile component.
+ */
 @Component({
   selector: 'app-me',
   templateUrl: './me.component.html',
@@ -46,6 +49,15 @@ export class MeComponent implements OnInit, OnDestroy {
     ]
   });
 
+  /**
+   * MeComponent constructor.
+   * @param userService User service.
+   * @param sessionService  Session service.
+   * @param fb Form builder.
+   * @param router Router.
+   * @param matSnackBar Material snack bar.
+   * @param sharedService Shared service.
+   */
   constructor (private userService: UserService,
                private sessionService: SessionService,
                private fb: FormBuilder,
@@ -53,6 +65,9 @@ export class MeComponent implements OnInit, OnDestroy {
                private matSnackBar: MatSnackBar,
                private sharedService: SharedService) {}
 
+  /**
+   * Init component.
+   */
   ngOnInit(): void {
     this.getProfileSubscription = this.userService.getProfile().subscribe({
       next: (user: User) => {
@@ -65,11 +80,17 @@ export class MeComponent implements OnInit, OnDestroy {
     })
   }
 
+  /**
+   * Destroy component.
+   */
   ngOnDestroy(): void {
     if (this.getProfileSubscription != undefined) this.getProfileSubscription.unsubscribe();
     if (this.updateProfileSubscription != undefined) this.updateProfileSubscription.unsubscribe();
   }
 
+  /**
+   * Submit update form.
+   */
   public submit() :void {
     const updateRequest = this.form.value as UpdateProfileRequest;
     this.updateProfileSubscription = this.userService.updateProfile(updateRequest).subscribe({
@@ -85,11 +106,19 @@ export class MeComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Log out current user.
+   */
   public logOut(): void {
     this.sessionService.logout();
     this.router.navigate(['']);
   }
 
+  /**
+   * Ge error message.
+   * @param field Form field concerned.
+   * @returns Error message.
+   */
   public getErrorText(field: FormControl): string {
     return this.sharedService.getFormControlErrorText(field);
   }

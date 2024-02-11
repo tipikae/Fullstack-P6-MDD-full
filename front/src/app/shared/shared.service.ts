@@ -1,11 +1,19 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
+/**
+ * Shared service.
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
 
+  /**
+   * Get form control error message.
+   * @param ctrl From control.
+   * @returns Error message.
+   */
   public getFormControlErrorText(ctrl: AbstractControl): string {
     if (ctrl.hasError('required')) {
       return 'Ce champ est requis';

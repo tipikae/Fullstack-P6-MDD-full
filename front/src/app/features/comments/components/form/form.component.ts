@@ -6,6 +6,9 @@ import { Comment } from '../../models/comment.model';
 import { SharedService } from 'src/app/shared/shared.service';
 import { Subscription } from 'rxjs';
 
+/**
+ * Comment form component.
+ */
 @Component({
   selector: 'app-comment-form',
   templateUrl: './form.component.html',
@@ -30,15 +33,28 @@ export class FormComponent implements OnDestroy {
   @Output() refreshList = new EventEmitter<boolean>();
   @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective;
 
+  /**
+   * Comment FormComponent constructor.
+   * @param commentService Comment service.
+   * @param matSnackBar MAterial snack bar.
+   * @param fb Form builder.
+   * @param sharedService Shared service.
+   */
   constructor (private commentService: CommentService,
                private matSnackBar: MatSnackBar,
                private fb: FormBuilder,
                private sharedService: SharedService) {}
 
+  /**
+   * Call on destroy.
+   */
   ngOnDestroy(): void {
     if (this.addCommentSubscription != undefined) this.addCommentSubscription.unsubscribe();
   }
   
+  /**
+   * Submit comment form.
+   */
   public submit(): void {
     const comment = this.form.value as Comment;
     this.addCommentSubscription = this.commentService.addComment(this.postId, comment).subscribe({
@@ -51,6 +67,11 @@ export class FormComponent implements OnDestroy {
     });
   }
 
+  /**
+   * Get error message.
+   * @param field Form field concerned.
+   * @returns Error message.
+   */
   public getErrorText(field: FormControl): string {
     return this.sharedService.getFormControlErrorText(field);
   }

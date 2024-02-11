@@ -9,6 +9,9 @@ import { Subscription } from 'rxjs';
 import { ErrorResponse } from 'src/app/models/errorResponse.model';
 import { HttpErrorResponse } from '@angular/common/http';
 
+/**
+ * Register component.
+ */
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -46,16 +49,30 @@ export class RegisterComponent implements OnDestroy {
     ]
   });
 
+  /**
+   * RegisterComponent constructor.
+   * @param authService Auth service.
+   * @param fb Form builder.
+   * @param router Router.
+   * @param matSnackBar Material snack bar.
+   * @param sharedService Shared service.
+   */
   constructor (private authService: AuthService,
                private fb: FormBuilder,
                private router: Router,
                private matSnackBar: MatSnackBar,
                private sharedService: SharedService) {}             
-               
+
+  /**
+   * Call on destroy.
+   */
   ngOnDestroy(): void {
     if (this.registerSubscription != undefined) this.registerSubscription.unsubscribe();;
   }
 
+  /**
+   * Submit register form.
+   */
   public submit(): void {
     const registerRequest = this.form.value as RegisterRequest;
     this.registerSubscription = this.authService.register(registerRequest).subscribe({
@@ -70,6 +87,11 @@ export class RegisterComponent implements OnDestroy {
     })
   }
 
+  /**
+   * Get error message.
+   * @param field Form field concerned.
+   * @returns Error message.
+   */
   public getErrorText(field: FormControl): string {
     return this.sharedService.getFormControlErrorText(field);
   }

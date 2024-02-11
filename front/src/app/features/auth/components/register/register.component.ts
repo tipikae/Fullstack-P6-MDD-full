@@ -41,8 +41,7 @@ export class RegisterComponent implements OnDestroy {
       [
         Validators.required,
         Validators.minLength(8),
-        Validators.maxLength(255),
-        Validators.pattern('(?=.*[0-9])(?=.*[!:;,+?$-])(?=.*[a-z])(?=.*[A-Z]).*')
+        Validators.maxLength(255)
       ]
     ]
   });
@@ -66,11 +65,7 @@ export class RegisterComponent implements OnDestroy {
       },
       error: (error: HttpErrorResponse) => {
         this.onError = true;
-        if(error.status == 409) {
-          this.error = error.error;
-        } else {
-          this.error.message = 'An error occurred during registration';
-        }
+        this.error = error.error;
       }
     })
   }

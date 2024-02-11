@@ -51,17 +51,17 @@ export class FormComponent implements OnInit, OnDestroy {
                private router: Router,
                private matSnackBar: MatSnackBar,
                private sharedService: SharedService) {}
-
-  ngOnDestroy(): void {
-    if (this.getTopicsSubscription != undefined) this.getTopicsSubscription.unsubscribe();
-    if (this.addPostSubscription != undefined) this.addPostSubscription.unsubscribe();
-  }
   
   ngOnInit(): void {
     this.getTopicsSubscription = this.topicService.getTopics().subscribe({
       next: (topics: Topic[]) => this.topics$.next(topics),
       error: _ => this.onError = true
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.getTopicsSubscription != undefined) this.getTopicsSubscription.unsubscribe();
+    if (this.addPostSubscription != undefined) this.addPostSubscription.unsubscribe();
   }
 
   public submit(): void {

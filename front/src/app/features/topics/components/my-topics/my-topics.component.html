@@ -2,7 +2,7 @@
     <hr>
     <div fxLayout="column" fxLayoutAlign="start center">
         <h2 fxShow="true" fxHide.lt-sm="true">Abonnements</h2>
-        <div *ngIf="topics.length > 0; else noTopics" fxLayout="column" fxLayout.gt-xs="row wrap" fxLayoutGap.gt-xs="10px">
+        <div *ngIf="topics && topics.length > 0; else noTopics" fxLayout="column" fxLayout.gt-xs="row wrap" fxLayoutGap.gt-xs="10px">
             <mat-card *ngFor="let topic of topics" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
                 <mat-card-header>
                     <mat-card-title>{{ topic.name }}</mat-card-title>

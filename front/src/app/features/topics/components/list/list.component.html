@@ -2,7 +2,7 @@
     <p *ngIf="topics$.value.length == 0; else topics" fxLayout="row" fxLayoutAlign="center center">No topics found</p>
     <ng-template #topics>
         <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="start start" fxLayoutAlign.lt-sm="start center" fxLayoutGap="10px">
-            <mat-card class="topic-card" *ngFor="let topic of topics$ | async">
+            <mat-card class="topic-card" *ngFor="let topic of (topics$ | async)">
                 <mat-card-header>
                     <mat-card-title>{{ topic.name }}</mat-card-title>
                 </mat-card-header>

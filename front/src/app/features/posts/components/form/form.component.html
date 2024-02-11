@@ -14,7 +14,7 @@
                     <mat-label>Sélectionner un thème</mat-label>
                     <mat-select formControlName="topicId">
                         <mat-option>--</mat-option>
-                        <mat-option *ngFor="let topic of topics$ | async" [value]="topic.id">{{ topic.name }}</mat-option>
+                        <mat-option *ngFor="let topic of (topics$ | async)" [value]="topic.id">{{ topic.name }}</mat-option>
                     </mat-select>
                     <mat-error>Ce champ est requis</mat-error>
                 </mat-form-field>

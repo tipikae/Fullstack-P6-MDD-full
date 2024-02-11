@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.error {
+    color: red;
+    max-width: 300px;
+}
+.btn {
+    box-shadow: none !important;
+}
+.btn-border-black-1 {
+    border: 1px solid black !important;
+}
+.btn-radius-5 {
+    border-radius: 5px !important;
+}

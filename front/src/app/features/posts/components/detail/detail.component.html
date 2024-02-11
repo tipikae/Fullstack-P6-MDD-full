@@ -1,0 +1,24 @@
+<div class="post-detail">
+    <mat-card *ngIf="post; else empty" fxLayout="column" fxLayoutGap="10px">
+        <div fxLayout fxLayoutAlign="start" fxLayoutGap="20px">
+            <button class="btn-back" mat-icon-button routerLink="/posts">
+                <mat-icon [inline]="true">arrow_back</mat-icon>
+            </button>
+            <mat-card-header>
+                <mat-card-title>{{ post.title }}</mat-card-title>
+            </mat-card-header>
+        </div>
+        <mat-card-content fxLayout="column" fxLayoutGap="10px">
+            <div fxLayout="row wrap" fxLayoutGap="50px">
+                <span>{{ post.createdAt | date : 'dd/MM/yy' }}</span><span>{{ post.userName }}</span><span>{{ post.topicName }}</span>
+            </div>
+            <div>
+                <span>Content: {{ post.content }}</span>
+            </div>
+            <app-comments [postId]="postId"></app-comments>
+        </mat-card-content>
+    </mat-card>
+    <ng-template #empty>
+        <p>Unable to retrieve article</p>
+    </ng-template>
+</div>

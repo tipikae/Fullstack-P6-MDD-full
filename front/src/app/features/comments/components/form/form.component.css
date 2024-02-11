@@ -1,0 +1,35 @@
+.form-comment {
+    width: 100%;
+    margin-top: 20px;
+    .w100 {
+        width: 100%;
+    }
+    .mat-mdc-text-field-wrapper:first-child {
+        border: 1px solid black;
+        border-radius: 5px;
+        background-color: white;
+    }
+    mat-form-field {
+        width: 100%;
+    }
+    .btn-send {
+        font-size: 36px;
+        transform: rotate(-45deg);
+        margin-bottom: 10px;
+    }
+}
+@media screen and (min-width: 600px) {
+    .form-comment {
+        .row {
+            border: 0;
+            border-radius: 0;
+        }
+        mat-form-field {
+            width: 80%;
+        }
+        .btn-send {
+            padding: 20px;
+            margin-right: 20px;
+        }
+    }
+}

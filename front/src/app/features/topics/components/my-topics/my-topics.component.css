@@ -1,0 +1,25 @@
+.my-topics {
+    margin-top: 20px;
+    mat-card {
+        width: 250px;
+        background-color: #e9edfd;
+        box-shadow: none;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        padding-bottom: 10px;
+    }
+}
+@media screen and (min-width: 600px) and (max-width: 739px) {
+    .my-topics {
+        mat-card {
+            width: 250px;
+        }
+    }
+}
+@media screen and (min-width: 740px) {
+    .my-topics {
+        mat-card {
+            width: 320px;
+        }
+    }
+}

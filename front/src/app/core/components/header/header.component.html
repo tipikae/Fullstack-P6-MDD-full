@@ -1,0 +1,32 @@
+<div class="header">
+    <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="logo">
+            <a routerLink="">
+                <img src="assets/img/logo.png">
+            </a>
+        </div>
+        <div class="menu" *ngIf="isLoggedIn()" fxLayout="row" fxLayoutGap="30px" fxShow="true" fxHide.lt-sm="true" fxLayoutAlign="none center">
+            <a mat-button routerLink="posts" routerLinkActive="active">Articles</a>
+            <a mat-button routerLink="topics" routerLinkActive="active">Thèmes</a>
+            <button class="btn-profile" mat-icon-button routerLink="me">
+                <mat-icon [inline]="true">account_circle</mat-icon>
+            </button>
+        </div>
+        <div fxShow="true" fxHide.gt-xs="true">
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar>
+    <mat-sidenav-container hasBackdrop="true">
+        <mat-sidenav #sidenav fxFlexFill fxLayout="column" fxHide.gt-xs="true" opened="false" mode="over" position="end">
+            <div fxLayout="column" fxLayoutAlign="none end" fxLayoutGap="10px">
+                <a mat-button routerLink="posts" routerLinkActive="active" (click)="sidenav.toggle()">Articles</a>
+                <a mat-button routerLink="topics" routerLinkActive="active" (click)="sidenav.toggle()">Thèmes</a>
+                <button class="btn-profile" mat-icon-button routerLink="me" (click)="sidenav.toggle()">
+                    <mat-icon [inline]="true">account_circle</mat-icon>
+                </button>
+            </div>
+        </mat-sidenav>
+    </mat-sidenav-container>
+</div>

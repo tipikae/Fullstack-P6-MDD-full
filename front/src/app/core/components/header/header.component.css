@@ -1,0 +1,70 @@
+.header {
+    border-bottom: 1px solid black;
+    mat-toolbar {
+        background: white;
+    }
+    mat-sidenav-container {
+        width: 100%;
+        height:100%;
+        z-index: 100;
+        position: absolute;
+        top: 0;
+        right: 0;
+        visibility: hidden;
+    }
+    mat-sidenav {
+        width:200px !important;
+        min-width: 200px !important;
+        height: 100%;
+    }
+    mat-sidenav div {
+        margin-right: 20px;
+        margin-top: 10px;
+    }
+    .mat-drawer-shown {
+        background-color: #c6bff4;
+        opacity: 70%;
+    }
+    .mat-drawer {
+        box-shadow: none;
+    }
+    .active {
+        color:#6c5ccf;
+        pointer-events: none;
+        cursor: default;
+    }
+    .logo img {
+        width: 80px;
+    }
+    .btn-profile {
+        display: inline-flex;
+        padding: 2px;
+        margin-top: 50px;
+    }
+    .btn-profile mat-icon {
+        font-size: 36px;
+    }
+
+}
+@media screen and (min-width: 600px) {
+    .header {
+        padding-left: 20px;
+        padding-right: 20px;
+        mat-toolbar {
+            background: white;
+            height: 80px;
+        }
+        .logo img {
+            width: 100px;
+        }
+        .menu {
+            align-items: flex-end;
+        }
+        .menu a {
+            font-size: 18px;
+        }
+        .btn-profile {
+            margin-top: 0;
+        }
+    }
+}

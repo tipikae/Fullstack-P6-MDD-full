@@ -1,0 +1,20 @@
+.post-detail {
+    padding: 10px;
+    mat-card {
+        box-shadow: none;
+    }
+    .btn-back {
+        display: inline-flex;
+        padding: 5px;
+    }
+    .btn-back mat-icon {
+        font-size: 36px;
+    }
+}
+@media screen and (min-width: 600px) {
+    .post-detail {
+        mat-card-content {
+            margin-left: 65px;
+        }
+    }
+}

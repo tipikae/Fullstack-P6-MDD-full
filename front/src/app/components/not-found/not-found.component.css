@@ -1,0 +1,11 @@
+.not-found {
+    padding: 50px;
+}
+@media screen and (min-width: 600px) {
+    .not-found {
+        padding: 100px;
+        .logo img {
+            width: 250px;
+        }
+    }
+}

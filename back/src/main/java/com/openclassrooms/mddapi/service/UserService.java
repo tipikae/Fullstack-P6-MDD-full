@@ -40,8 +40,11 @@ public class UserService implements IUserService {
      * @throws AlreadyExistsException thrown when user already exists.
      */
     public User create(User user) throws AlreadyExistsException {
-        if (userRepository.existsByEmailOrUsername(user.getEmail(), user.getUsername())) {
-            throw new AlreadyExistsException("Email or username is already taken.");
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new AlreadyExistsException("Email is already taken.");
+        }
+        if (userRepository.existsByUsername(user.getUsername())) {
+            throw new AlreadyExistsException("Username is already taken.");
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));

@@ -15,12 +15,18 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     /**
-     * Check if a user exists with that email or username.
+     * Check if a user exists with that email.
      * @param email User email.
+     * @return boolean
+     */
+    boolean existsByEmail(String email);
+
+    /**
+     * Check if a user exists with that username.
      * @param username User username.
      * @return boolean
      */
-    boolean existsByEmailOrUsername(String email, String username);
+    boolean existsByUsername(String username);
 
     /**
      * Find a user by its email.

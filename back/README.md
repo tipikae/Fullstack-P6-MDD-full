@@ -19,8 +19,6 @@ Go to `resources/sql` in the root directory and :
 * create a database `CREATE DATABASE mdd;`,
 * import the SQL script `SOURCE script.sql;`.
 
-Open `src/main/resources/application-prod.properties` and update `spring.datasource.username` and `spring.datasource.password` with your MySQL credentials.
-
 ## Run
 In the root directory execute `mvn clean verify` in order to compile, test and package the archive.
 
@@ -28,9 +26,9 @@ There are two profiles to launch the application:
 - `dev`: default profile, for development only, with in-memory database,
 - `prod`: for production, with MySQL database.
 
-Go to `target` directory and execute `java -Dspring.profiles.active=prod -jar mdd-api-1.0.0.jar`.
+Go to `target` directory and execute `java -Dspring.profiles.active=prod -Dspring.datasource.username=MYSQL_USERNAME -Dspring.datasource.password=MYSQL_PASSWORD -jar mdd-api-1.0.0.jar` where `MYQSL_USERNAME` and `MYSQL_PASSWORD` are your MySQL credentials.
 
-You can use an app like Postman to test the endpoints.
+You can use an app like Postman or Swagger to test the endpoints.
 
 ## Folder structure
 ```bash

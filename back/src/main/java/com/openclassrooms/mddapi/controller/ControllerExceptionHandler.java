@@ -51,7 +51,7 @@ public class ControllerExceptionHandler {
         Map<String, String> errors = new HashMap<>();
         e.getConstraintViolations().forEach(error -> errors.put(error.getRootBeanClass().getName(), error.getMessage()));
         ObjectMapper mapper = new ObjectMapper();
-        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), mapper.writeValueAsString(errors));
+        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), errors.entrySet().stream().findFirst().get().getValue());
     }
 
     /**
@@ -67,7 +67,7 @@ public class ControllerExceptionHandler {
         Map<String, String> errors = new HashMap<>();
         e.getBindingResult().getAllErrors().forEach(error -> errors.put(((FieldError) error).getField(), error.getDefaultMessage()));
         ObjectMapper mapper = new ObjectMapper();
-        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), mapper.writeValueAsString(errors));
+        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), errors.entrySet().stream().findFirst().get().getValue());
     }
 
     /**

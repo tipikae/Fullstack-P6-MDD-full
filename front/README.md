@@ -1,27 +1,85 @@
-# MddClient
+# Monde de Dév MDD Client
+MDD Client is the front-end of the MDD application, a social network for developer, powered by Angular framework.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.1.
+## Prerequisites
+- Angular 17.1.1
+- Node 20.10.0
+- Npm 10.4.0
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+First install a node version manager like [nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
 
-## Code scaffolding
+Execute `nvm install 20.10.0` to install Node and npm.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Execute `npm install -g @angular/17.1.1` to install Angular.
 
-## Build
+Run `npm install` to install all the dependencies.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Run
 
-## Running unit tests
+To run the app in dev mode, execute `npm run start`.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+In a browser go to `http://localhost:4200` to use the app (IMPORTANT: start the back-end before !).
 
-## Running end-to-end tests
+## Use
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Begin by register yourself on the app and log in.
 
-## Further help
+Some topics are already available for subscribing in at `http://localhost:4200/topics`.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Go to `http://localhost:4200/posts`, you can now publish an article selecting a topic.
+
+Enjoy !!!
+
+## Folder structure
+```bash
+└── src
+    ├── app
+    │   ├── components
+    │   │   ├── home
+    │   │   ├── me
+    │   │   └── not-found
+    │   ├── core
+    │   │   └── components
+    │   │       └── header
+    │   ├── features
+    │   │   ├── auth
+    │   │   │   ├── components
+    │   │   │   │   ├── login
+    │   │   │   │   └── register
+    │   │   │   ├── models
+    │   │   │   └── services
+    │   │   ├── comments
+    │   │   │   ├── components
+    │   │   │   │   ├── form
+    │   │   │   │   └── list
+    │   │   │   ├── models
+    │   │   │   └── services
+    │   │   ├── posts
+    │   │   │   ├── components
+    │   │   │   │   ├── detail
+    │   │   │   │   ├── form
+    │   │   │   │   └── list
+    │   │   │   ├── models
+    │   │   │   └── services
+    │   │   └── topics
+    │   │       ├── components
+    │   │       │   ├── list
+    │   │       │   └── my-topics
+    │   │       ├── models
+    │   │       └── services
+    │   ├── guards
+    │   ├── interceptors
+    │   ├── models
+    │   ├── services
+    │   └── shared
+    ├── assets
+    │   ├── favicon
+    │   └── img
+    └── environments
+```
+
+## Author
+
+Gilles BERNARD (@tipikae)

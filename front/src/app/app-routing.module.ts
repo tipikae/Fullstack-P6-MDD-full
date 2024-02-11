@@ -8,7 +8,7 @@ import { authGuard } from "./guards/auth.guard";
 import { ListComponent } from "./features/topics/components/list/list.component";
 
 const routes: Routes = [
-    { path: '', canActivate: [unauthGuard], component: HomeComponent },
+    { title: 'Home', path: '', canActivate: [unauthGuard], component: HomeComponent },
     {
         path: 'auth',
         canActivate: [unauthGuard],
@@ -19,9 +19,9 @@ const routes: Routes = [
         canActivate: [authGuard],
         loadChildren: () => import('./features/posts/posts.module').then(m => m.PostsModule)
     },
-    { path: 'me', canActivate: [authGuard], component: MeComponent },
-    { path: 'topics', canActivate: [authGuard], component: ListComponent },
-    { path: '404', component: NotFoundComponent },
+    { title: 'Profile', path: 'me', canActivate: [authGuard], component: MeComponent },
+    { title: 'Topics', path: 'topics', canActivate: [authGuard], component: ListComponent },
+    { title: 'Not found', path: '404', component: NotFoundComponent },
     { path: '**', redirectTo: '404' }
 ];
 

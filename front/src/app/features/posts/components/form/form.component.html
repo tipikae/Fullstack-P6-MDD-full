@@ -29,8 +29,10 @@
                     <mat-error>{{ getErrorText(form.controls.content) }}</mat-error>
                 </mat-form-field>
             </mat-card-content>
-            <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Créer</button>
-            <p *ngIf="onError"></p>
+            <div fxLayout="column" fxLayoutAlign="center center">
+                <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Créer</button>
+                <p *ngIf="onError" class="error">An error occurred during creation</p>
+            </div>
         </form>
     </mat-card>
 </div>

@@ -46,7 +46,8 @@ export class FormComponent implements OnDestroy {
         this.matSnackBar.open('Comment added successfully !', 'Close', { duration: 3000 });
         this.formGroupDirective.resetForm();
         this.refreshList.emit(true);
-      }
+      },
+      error: _ => this.onError = true
     });
   }
 

@@ -71,7 +71,7 @@ export class FormComponent implements OnInit, OnDestroy {
         this.matSnackBar.open('Article created successfully !', 'Close', { duration: 3000 });
         this.router.navigate(['posts']);
       },
-      error: _ => this.matSnackBar.open('Article creation failed', 'Close', { duration: 3000 })
+      error: _ => this.onError = true
     });
   }
 

@@ -9,6 +9,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Topic } from 'src/app/features/topics/models/topic.model';
 import { SharedService } from 'src/app/shared/shared.service';
 import { Subscription } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorResponse } from 'src/app/models/errorResponse.model';
 
 @Component({
   selector: 'app-me',
@@ -21,6 +23,7 @@ export class MeComponent implements OnInit, OnDestroy {
   private updateProfileSubscription!: Subscription;
 
   public onError: boolean = false;
+  public error!: ErrorResponse;
   public onSuccess: boolean = false;
   public user: User | undefined;
   public topics: Topic[] = [];
@@ -73,8 +76,12 @@ export class MeComponent implements OnInit, OnDestroy {
       next: _ => {
         this.ngOnInit();
         this.matSnackBar.open('Profile updated !', 'Close', { duration: 3000 });
+        this.onError = false;
       },
-      error: _ => this.onError = true
+      error: (error: HttpErrorResponse) => {
+        this.onError = true;
+        this.error = error.error;
+      }
     });
   }
 

@@ -4,6 +4,7 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .error {
     color: red;
+    max-width: 300px;
 }
 .btn {
     box-shadow: none !important;

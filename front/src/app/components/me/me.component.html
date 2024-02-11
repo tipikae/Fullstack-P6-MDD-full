@@ -18,7 +18,7 @@
             </mat-card-content>
             <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start center">
                 <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Sauvegarder</button>
-                <p *ngIf="onError" class="error">An error occurred</p>
+                <p *ngIf="onError" class="error">{{ error.message }}</p>
                 <a class="link" (click)="logOut()">Se déconnecter</a>
             </div>
         </form>

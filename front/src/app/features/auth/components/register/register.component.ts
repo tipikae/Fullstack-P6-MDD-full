@@ -6,6 +6,8 @@ import { RegisterRequest } from '../../models/registerRequest.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SharedService } from 'src/app/shared/shared.service';
 import { Subscription } from 'rxjs';
+import { ErrorResponse } from 'src/app/models/errorResponse.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -15,8 +17,8 @@ import { Subscription } from 'rxjs';
 export class RegisterComponent implements OnDestroy {
 
   public registerSubscription!: Subscription;
-
   public onError: boolean = false;
+  public error!: ErrorResponse;
 
   public form = this.fb.group({
     username: [
@@ -39,8 +41,7 @@ export class RegisterComponent implements OnDestroy {
       [
         Validators.required,
         Validators.minLength(8),
-        Validators.maxLength(255),
-        Validators.pattern('(?=.*[0-9])(?=.*[!:;,+?$-])(?=.*[a-z])(?=.*[A-Z]).*')
+        Validators.maxLength(255)
       ]
     ]
   });
@@ -62,7 +63,10 @@ export class RegisterComponent implements OnDestroy {
         this.matSnackBar.open('Registration success !', 'Close', { duration: 3000 })
         this.router.navigate(['auth/login']);
       },
-      error: _ => this.onError = true
+      error: (error: HttpErrorResponse) => {
+        this.onError = true;
+        this.error = error.error;
+      }
     })
   }
 

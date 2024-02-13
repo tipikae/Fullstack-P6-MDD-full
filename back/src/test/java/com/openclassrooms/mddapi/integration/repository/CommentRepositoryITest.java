@@ -48,7 +48,7 @@ public class CommentRepositoryITest {
                         .build());
 
         // save topic
-        topic = topicRepository.save(Topic.builder().name("name-comment").build());
+        topic = topicRepository.save(Topic.builder().name("name-comment").description("test").build());
 
         // save post
         post = postRepository.save(

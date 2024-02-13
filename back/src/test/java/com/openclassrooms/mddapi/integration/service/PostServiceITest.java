@@ -41,12 +41,12 @@ public class PostServiceITest {
     void setUp() {
         user = userRepository.save(
                 User.builder()
-                        .email("itestpost@email.com")
-                        .username("itestpost-username")
+                        .email("post@service.com")
+                        .username("postService")
                         .password("123456Tr+")
                         .build());
 
-        topic = topicRepository.save(Topic.builder().name("itestpost-topic").build());
+        topic = topicRepository.save(Topic.builder().name("itestpost-topic").description("test").build());
     }
 
     @AfterAll

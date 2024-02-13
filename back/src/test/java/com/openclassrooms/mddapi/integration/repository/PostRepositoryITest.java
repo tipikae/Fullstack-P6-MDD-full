@@ -42,7 +42,7 @@ public class PostRepositoryITest {
                         .build());
 
         // save topic
-        topic = topicRepository.save(Topic.builder().name("topic-name").build());
+        topic = topicRepository.save(Topic.builder().name("topic-name").description("test").build());
     }
 
     @AfterAll

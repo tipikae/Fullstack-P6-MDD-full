@@ -37,7 +37,7 @@ public class UserServiceITest {
 
     @BeforeAll
     void setUp() {
-        topic = topicRepository.save(Topic.builder().name("itest-user-topic").build());
+        topic = topicRepository.save(Topic.builder().name("itest-user-topic").description("test").build());
     }
 
     @AfterAll
@@ -53,16 +53,16 @@ public class UserServiceITest {
         // create
         user = userService.create(
                 User.builder()
-                        .username("itest-username")
-                        .email("itest@email.com")
+                        .username("userService")
+                        .email("user@service.com")
                         .password("123456Xz+")
                         .topics(new ArrayList<>())
                         .build());
         assertNotNull(user);
         assertThrows(AlreadyExistsException.class, () -> userService.create(
                 User.builder()
-                        .username("itest-username")
-                        .email("itest@email.com")
+                        .username("userService")
+                        .email("user@service.com")
                         .password("123456Xz+")
                         .topics(new ArrayList<>())
                         .build()));
@@ -72,7 +72,7 @@ public class UserServiceITest {
         assertThrows(NotFoundException.class, () -> userService.getById(10000L));
 
         // update
-        user.setEmail("updated@email.com");
+        user.setEmail("updated@service.com");
         userService.update(user.getId(), user);
         assertEquals(user.getEmail(), userService.getById(user.getId()).getEmail());
         assertThrows(NotFoundException.class, () -> userService.update(10000L, user));

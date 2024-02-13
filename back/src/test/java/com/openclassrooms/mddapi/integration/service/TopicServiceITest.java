@@ -27,7 +27,7 @@ public class TopicServiceITest {
 
     @BeforeAll
     void setUp() {
-        topic = topicRepository.save(Topic.builder().name("itest-topic").build());
+        topic = topicRepository.save(Topic.builder().name("itest-topic").description("test").build());
     }
 
     @AfterAll

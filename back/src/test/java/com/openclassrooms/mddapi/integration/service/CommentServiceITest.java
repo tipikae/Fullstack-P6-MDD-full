@@ -46,13 +46,14 @@ public class CommentServiceITest {
     @BeforeAll
     void setUp() {
         user = userRepository.save(User.builder()
-                .username("itest-comment-username")
-                .email("itest-comment@email.com")
+                .username("commentService")
+                .email("comment@service.com")
                 .password("123456Qg+")
                 .build());
 
         topic = topicRepository.save(Topic.builder()
                 .name("itest-comment-topic")
+                        .description("test")
                 .build());
 
         post = postRepository.save(Post.builder()

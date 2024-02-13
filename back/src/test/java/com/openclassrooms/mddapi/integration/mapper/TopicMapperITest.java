@@ -20,6 +20,7 @@ public class TopicMapperITest {
     void test() throws NotFoundException {
         Topic topic = Topic.builder()
                 .name("itest-mapper-topic")
+                .description("test")
                 .build();
 
         // to dto

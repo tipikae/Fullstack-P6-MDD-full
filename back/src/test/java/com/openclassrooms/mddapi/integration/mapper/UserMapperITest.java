@@ -19,8 +19,8 @@ public class UserMapperITest {
     @Test
     void test() throws NotFoundException {
         User user = User.builder()
-                .username("itest-mapper-user")
-                .email("itest-user@mapper.com")
+                .username("userMapper")
+                .email("user@mapper.com")
                 .password("123456Mn+")
                 .build();
 

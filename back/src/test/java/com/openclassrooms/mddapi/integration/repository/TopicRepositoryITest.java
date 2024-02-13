@@ -17,7 +17,7 @@ public class TopicRepositoryITest {
     @Test
     void test() {
         // save
-        Topic topic = topicRepository.save(Topic.builder().name("topic-name").build());
+        Topic topic = topicRepository.save(Topic.builder().name("topic-name").description("test").build());
         assertNotNull(topic);
 
         // get all

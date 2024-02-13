@@ -37,12 +37,12 @@ public class PostMapperITest {
     void setUp() {
         user = userRepository.save(
                 User.builder()
-                        .username("username")
-                        .email("test@test.com")
+                        .username("postMapper")
+                        .email("post@mapper.com")
                         .password("123456Cd+")
                         .build());
 
-        topic = topicRepository.save(Topic.builder().name("topic-name").build());
+        topic = topicRepository.save(Topic.builder().name("topic-name").description("test").build());
     }
 
     @AfterAll
@@ -64,7 +64,7 @@ public class PostMapperITest {
         PostDto postDto = postMapper.toDto(post);
         postDto.setUserId(user.getId());
         assertEquals(user.getId(), postDto.getUserId());
-        assertEquals("username", postDto.getUserName());
+        assertEquals("postMapper", postDto.getUserName());
         assertEquals(topic.getId(), postDto.getTopicId());
         assertEquals("topic-name", postDto.getTopicName());
 

@@ -43,12 +43,12 @@ public class CommentMapperITest {
     void setUp() {
         author = userRepository.save(
                 User.builder()
-                        .username("username")
-                        .email("test@test.com")
+                        .username("commentMapper")
+                        .email("comment@mapper.com")
                         .password("123456Qm+")
                         .build());
 
-        topic = topicRepository.save(Topic.builder().name("topic-name").build());
+        topic = topicRepository.save(Topic.builder().name("topic-name").description("test").build());
 
         post = postRepository.save(
                 Post.builder()
